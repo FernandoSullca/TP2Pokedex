@@ -16,7 +16,7 @@
         <!--<label for="name">Nombre</label>-->
         <input type="text" id="name" name="user_name" placeholder="Nombre">
         <!-- <label for="surname">Apellido</label>-->
-        <input type="text" id="surname" name="user_surname" placeholder="Apellido">
+        < input type="text" id="surname" name="user_surname" placeholder="Apellido">
         <button type="submit" name="ingresar" >ingresar</button>
     </form>
 </header>
