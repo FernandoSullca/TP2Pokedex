@@ -11,7 +11,7 @@
 <body>
 <header>
     <div class="w3-container w3-teal">
-        <h1>Logo</h1>
+        <img src="/image/pokemon-ge1bca3c56_1280.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon">
         <h1>Pokedex</h1>
     </div>
 

@@ -13,6 +13,7 @@
     <div class="w3-container w3-teal">
         <img src="/image/pokemon-ge1bca3c56_1280.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon">
         <h1 >Pokedex</h1></div>
+        <h1 >Usuario ADMIN</h1></div>
     <form action="" method="post" id="Ingreso">
         <!--<label for="name">Nombre</label>-->
         <input type="text" id="name" name="user_name" placeholder="Nombre">
