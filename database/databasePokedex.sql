@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `pokedex` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `pokedex`;
 -- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: pokedex
@@ -36,7 +34,7 @@ CREATE TABLE `pokemon` (
   PRIMARY KEY (`id`),
   KEY `fk_parent__pokemon_id` (`parent_id`),
   CONSTRAINT `fk_parent__pokemon_id` FOREIGN KEY (`parent_id`) REFERENCES `pokemon` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +43,7 @@ CREATE TABLE `pokemon` (
 
 LOCK TABLES `pokemon` WRITE;
 /*!40000 ALTER TABLE `pokemon` DISABLE KEYS */;
-INSERT INTO `pokemon` VALUES (1,1,'https://static.wikia.nocookie.net/espokemon/images/4/43/Bulbasaur.png/revision/latest/scale-to-width-down/350?cb=20170120032346','Bulbasaur','Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo)',50,50,NULL);
+INSERT INTO `pokemon` VALUES (1,1,'https://static.wikia.nocookie.net/espokemon/images/4/43/Bulbasaur.png/revision/latest/scale-to-width-down/350?cb=20170120032346','Bulbasaur','Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo)',50,50,NULL),(2,2,'https://static.wikia.nocookie.net/espokemon/images/8/86/Ivysaur.png/revision/latest/scale-to-width-down/260?cb=20140207202404','Ivysaur','Ivysaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Bulbasaur, uno de los Pokémon iniciales de Kanto.',130,10,1),(3,3,'https://static.wikia.nocookie.net/espokemon/images/b/be/Venusaur.png/revision/latest/scale-to-width-down/350?cb=20160309230456','Venusaur','Venusaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Ivysaur y, a partir de la sexta generación, puede megaevolucionar en Mega-Venusaur.',1000,20,2);
 /*!40000 ALTER TABLE `pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,14 +127,6 @@ LOCK TABLES `usuario` WRITE;
 INSERT INTO `usuario` VALUES (1,'Sullca','203784',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'pokedex'
---
-
---
--- Dumping routines for database 'pokedex'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -147,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-03 16:51:57
+-- Dump completed on 2022-05-03 23:28:41
