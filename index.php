@@ -1,3 +1,37 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$dbname = "pokedex";
+$password = "20Sullca1";
+
+// Create connection
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM pokemon";
+$result = mysqli_query($conn, $sql);
+
+$pokemones = Array();
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+        $pokemon = Array();
+        $pokemon['image_path'] =  $row["image_path"];
+        $pokemon['id'] =  $row["id"];
+        $pokemon['order_number'] =  $row["order_number"];
+        $pokemon['name'] =  $row["name"];
+        $pokemones[] = $pokemon;
+    }
+}
+
+
+mysqli_close($conn);
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,6 +60,40 @@
     <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quine es este pokémon?</button>
 </form>
+
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+    <!-- The Band Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+        <h2 class="w3-wide">Info Pokemones</h2>
+        <table class="w3-table">
+            <tr>
+                <th>Imagen</th>
+                <th>tipo</th>
+                <th>número</th>
+                <th>nombre</th>
+            </tr>
+
+            <?php
+            foreach ( $pokemones as $pokemons){
+                echo   "<tr> 
+                                <img src=". $pokemons['image_path'] . ">
+                                <td>" . $pokemons['image_path'] . "</td>
+                                <td>" . $pokemons['id'] . "</td>
+                                <td>" . $pokemons['order_number'] . "</td>
+                                <td>" . $pokemons['name'] . "</td>
+                             
+                            </tr>";
+            }
+            ?>
+        </table>
+    </div>
+
+    <!-- End Page Content -->
+</div>
+
 <footer>
 
 </footer>
