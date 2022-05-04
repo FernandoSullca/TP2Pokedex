@@ -34,7 +34,7 @@ CREATE TABLE `pokemon` (
   PRIMARY KEY (`id`),
   KEY `fk_parent__pokemon_id` (`parent_id`),
   CONSTRAINT `fk_parent__pokemon_id` FOREIGN KEY (`parent_id`) REFERENCES `pokemon` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `pokemon` (
 
 LOCK TABLES `pokemon` WRITE;
 /*!40000 ALTER TABLE `pokemon` DISABLE KEYS */;
-INSERT INTO `pokemon` VALUES (1,1,'./image/Bulbasaur.png','Bulbasaur','Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo)',50,50,NULL),(2,2,'./image/Ivysaur.png','Ivysaur','Ivysaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Bulbasaur, uno de los Pokémon iniciales de Kanto.',130,10,1),(3,3,'./image/Venusaur.png','Venusaur','Venusaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Ivysaur y, a partir de la sexta generación, puede megaevolucionar en Mega-Venusaur.',1000,20,2);
+INSERT INTO `pokemon` VALUES (1,1,'./image/Bulbasaur.png','Bulbasaur','Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo)',50,50,NULL),(2,2,'./image/Ivysaur.png','Ivysaur','Ivysaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Bulbasaur, uno de los Pokémon iniciales de Kanto.',130,10,1),(3,3,'./image/Venusaur.png','Venusaur','Venusaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Ivysaur y, a partir de la sexta generación, puede megaevolucionar en Mega-Venusaur.',1000,20,2),(4,4,'./image/Charmander.webp','Charmander','Charmander es un Pokémon de tipo fuego introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Bulbasaur y Squirtle',85,6,NULL),(5,5,'./image/Charmander.webp','Charmeleon','Charmeleon es un Pokémon de tipo fuego introducido en la primera generación. Es la evolución de Charmander, uno de los Pokémon iniciales de los entrenadores que comienzan su aventura en la región de Kanto.',190,11,4),(6,6,'./image/Charizard.webp','Charizard','Charizard es un Pokémon de tipo fuego/volador, introducido en la primera generación. Es la evolución de Charmeleon y, a partir de la sexta generación, puede megaevolucionar en Mega-Charizard X o en Mega-Charizard Y.',905,17,5);
 /*!40000 ALTER TABLE `pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -70,7 +70,7 @@ CREATE TABLE `pokemon__pokemon_type` (
 
 LOCK TABLES `pokemon__pokemon_type` WRITE;
 /*!40000 ALTER TABLE `pokemon__pokemon_type` DISABLE KEYS */;
-INSERT INTO `pokemon__pokemon_type` VALUES (1,2),(1,1);
+INSERT INTO `pokemon__pokemon_type` VALUES (1,1),(1,2),(2,1),(2,2),(3,1),(3,2),(4,1),(5,2),(6,1),(6,2);
 /*!40000 ALTER TABLE `pokemon__pokemon_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `pokemon_type` (
   `description` varchar(255) DEFAULT NULL,
   `image_path` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `pokemon_type` (
 
 LOCK TABLES `pokemon_type` WRITE;
 /*!40000 ALTER TABLE `pokemon_type` DISABLE KEYS */;
-INSERT INTO `pokemon_type` VALUES (1,'Planta','https://static.wikia.nocookie.net/espokemon/images/d/d6/Tipo_planta.gif/revision/latest/scale-to-width-down/48?cb=20170114100444'),(2,'Veneno','https://static.wikia.nocookie.net/espokemon/images/1/10/Tipo_veneno.gif/revision/latest/scale-to-width-down/48?cb=20170114100535');
+INSERT INTO `pokemon_type` VALUES (1,'Planta','https://static.wikia.nocookie.net/espokemon/images/d/d6/Tipo_planta.gif/revision/latest/scale-to-width-down/48?cb=20170114100444'),(2,'Veneno','https://static.wikia.nocookie.net/espokemon/images/1/10/Tipo_veneno.gif/revision/latest/scale-to-width-down/48?cb=20170114100535'),(3,'Fuego','https://static.wikia.nocookie.net/espokemon/images/c/ce/Tipo_fuego.gif/revision/latest/scale-to-width-down/48?cb=20170114100331'),(4,'Volador','https://static.wikia.nocookie.net/espokemon/images/1/10/Tipo_veneno.gif/revision/latest/scale-to-width-down/48?cb=20170114100535');
 /*!40000 ALTER TABLE `pokemon_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,8 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-03 23:28:41
-
-UPDATE pokemon set image_path ='./image/Bulbasaur.png' where name='Bulbasaur';
-UPDATE pokemon set image_path ='./image/Ivysaur.png' where name='Ivysaur';
-UPDATE pokemon set image_path ='./image/Venusaur.png' where name='Venusaur';
+-- Dump completed on 2022-05-04 14:00:20
