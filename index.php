@@ -79,8 +79,8 @@ mysqli_close($conn);
             <?php
             foreach ( $pokemones as $pokemons){
                 echo   "<tr> 
-                                <img src=". $pokemons['image_path'] . ">
-                                <td>" . $pokemons['image_path'] . "</td>
+                               
+                                <td>  <img src=". $pokemons['image_path'] . "> </td>
                                 <td>" . $pokemons['id'] . "</td>
                                 <td>" . $pokemons['order_number'] . "</td>
                                 <td>" . $pokemons['name'] . "</td>
