@@ -45,7 +45,7 @@ mysqli_close($conn);
 <body>
 <header>
     <div class="w3-container w3-teal">
-        <img src="/image/pokemon-ge1bca3c56_1280.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon">
+        <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
     <form action="" method="post" id="Ingreso">
         <!--<label for="name">Nombre</label>-->
@@ -78,14 +78,14 @@ mysqli_close($conn);
 
             <?php
             foreach ( $pokemones as $pokemons){
-                echo   "<tr> 
-                                <img src=". $pokemons['image_path'] . ">
+                echo   "<tr>". 
+                               "<td><img"." alt=".$pokemons['name']." src =". $pokemons['image_path'] . "></td>
                                 <td>" . $pokemons['image_path'] . "</td>
                                 <td>" . $pokemons['id'] . "</td>
                                 <td>" . $pokemons['order_number'] . "</td>
                                 <td>" . $pokemons['name'] . "</td>
                              
-                            </tr>";
+                        </tr>";
             }
             ?>
         </table>

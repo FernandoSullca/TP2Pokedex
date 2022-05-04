@@ -43,7 +43,7 @@ CREATE TABLE `pokemon` (
 
 LOCK TABLES `pokemon` WRITE;
 /*!40000 ALTER TABLE `pokemon` DISABLE KEYS */;
-INSERT INTO `pokemon` VALUES (1,1,'https://static.wikia.nocookie.net/espokemon/images/4/43/Bulbasaur.png/revision/latest/scale-to-width-down/350?cb=20170120032346','Bulbasaur','Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo)',50,50,NULL),(2,2,'https://static.wikia.nocookie.net/espokemon/images/8/86/Ivysaur.png/revision/latest/scale-to-width-down/260?cb=20140207202404','Ivysaur','Ivysaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Bulbasaur, uno de los Pokémon iniciales de Kanto.',130,10,1),(3,3,'https://static.wikia.nocookie.net/espokemon/images/b/be/Venusaur.png/revision/latest/scale-to-width-down/350?cb=20160309230456','Venusaur','Venusaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Ivysaur y, a partir de la sexta generación, puede megaevolucionar en Mega-Venusaur.',1000,20,2);
+INSERT INTO `pokemon` VALUES (1,1,'./image/Bulbasaur.png','Bulbasaur','Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo)',50,50,NULL),(2,2,'./image/Ivysaur.png','Ivysaur','Ivysaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Bulbasaur, uno de los Pokémon iniciales de Kanto.',130,10,1),(3,3,'./image/Venusaur.png','Venusaur','Venusaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Ivysaur y, a partir de la sexta generación, puede megaevolucionar en Mega-Venusaur.',1000,20,2);
 /*!40000 ALTER TABLE `pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,3 +138,7 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-05-03 23:28:41
+
+UPDATE pokemon set image_path ='./image/Bulbasaur.png' where name='Bulbasaur';
+UPDATE pokemon set image_path ='./image/Ivysaur.png' where name='Ivysaur';
+UPDATE pokemon set image_path ='./image/Venusaur.png' where name='Venusaur';
