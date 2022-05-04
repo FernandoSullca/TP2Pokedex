@@ -1,3 +1,10 @@
+<?php
+include_once("MySqlDatabase.php");
+$database = new MySqlDatabase('xxxx','xxxx','xxxx','xxxx');
+
+
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
