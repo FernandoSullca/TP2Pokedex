@@ -81,7 +81,6 @@ mysqli_close($conn);
                 echo   "<tr>". 
                                "<td><img"." alt=".$pokemons['name']." src =". $pokemons['image_path'] . "></td>
                                 <td>" . $pokemons['image_path'] . "</td>
-                                <td>" . $pokemons['id'] . "</td>
                                 <td>" . $pokemons['order_number'] . "</td>
                                 <td>" . $pokemons['name'] . "</td>
                              

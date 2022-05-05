@@ -38,10 +38,10 @@ function validarUsuario($usuario, $pass){
         echo  $row["passwordU"];
         mysqli_close($conn);
         #-------------------------
-        #password_verify();
+        #md5() crea/insert
+        #password_verify(); verificar
     return $usuario == $row["nameU"] &&  $pass==$row["passwordU"];
     }
     return false;
-
 
 }
