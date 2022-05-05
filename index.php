@@ -47,15 +47,15 @@ mysqli_close($conn);
     <div class="w3-container w3-teal">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-    <form action="" method="post" id="Ingreso">
+    <form action="login.php" method="post" id="Ingreso">
         <!--<label for="name">Nombre</label>-->
         <input type="text" id="name" name="user_name" placeholder="Nombre">
         <!-- <label for="surname">Apellido</label>-->
-        <input type="text" id="surname" name="user_surname" placeholder="Apellido">
+        <input type="text" id="password" name="user_password" placeholder="Password">
         <button type="submit" name="ingresar" >ingresar</button>
     </form>
 </header>
-<form action="" method="post" id="Busqueda">
+<form action="login.php" method="post" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
     <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quine es este pokémon?</button>
