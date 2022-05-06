@@ -15,18 +15,25 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM pokemon";
+$sql = "select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
+from pokemon p
+join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
+from pokemon__pokemon_type ppt 
+join pokemon_type pt on pt.id = ppt.pokemon_type_id
+group by ppt.pokemon_id)as type on type.pokemon_id = p.id";
 $result = mysqli_query($conn, $sql);
 
-$pokemones = array();
+$pokemones = Array();
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
-    while ($row = mysqli_fetch_assoc($result)) {
-        $pokemon = array();
-        $pokemon['image_path'] = $row["image_path"];
-        $pokemon['id'] = $row["id"];
-        $pokemon['order_number'] = $row["order_number"];
-        $pokemon['name'] = $row["name"];
+    while($row = mysqli_fetch_assoc($result)) {
+        $pokemon = Array();
+        $pokemon['image_path'] =  $row["image_path"];
+        $pokemon['image_path_type'] =  $row["image_path_type"];
+        $pokemon['description'] =  $row["description"];
+        $pokemon['order_number'] =  $row["order_number"];
+        $pokemon['name'] =  $row["name"];
+        $pokemon['id'] =  $row["id"];
         $pokemones[] = $pokemon;
     }
 }
@@ -83,14 +90,18 @@ mysqli_close($conn);
 
             <?php
             foreach ( $pokemones as $pokemons){
-                echo   "<tr>".
-                    "<td><img"." alt=".$pokemons['name']." src =". $pokemons['image_path'] . "></td>
-                                <td>" . $pokemons['image_path'] . "</td>
-                                <td>" . $pokemons['order_number'] . "</td>
-                                <td>" . $pokemons['name'] . "</td>
-                                <td><button". " type=submit"." name=modificarPokemon.".">Modificar</button>."."</td>
-                                <td><button". " type=submit"." name=bajarPokemon.".">Baja</button>."."</td>
-                        </tr>";
+            ?>
+            <tr>
+                <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                <td><?php
+                    foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
+                        echo "<img src =". $imagePathType.">" ; ?></td>
+                <td><?php echo $pokemons['order_number']; ?></td>
+                <td><?php echo $pokemons['name']; ?></td>
+                <td><?php echo "<button type=submit name=modificarPokemon>Modificar</button>"; ?></td>
+                <td><?php echo "<button type=submit name=eliminarPokemon>Eliminar</button>"; ?></td>
+            </tr>
+                <?php
             }
             ?>
         </table>
