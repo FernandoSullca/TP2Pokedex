@@ -1,45 +1,21 @@
 <?php
-#include_once("MySqlDatabase.php");
-#$database = new MySqlDatabase('xxxx','xxxx','xxxx','xxxx');
+include_once("MySqlDatabase.php");
+$database = new MySqlDatabase('localhost','root','Ariel3009','pokedex');
 
-$servername = "localhost";
-$username = "root";
-$dbname = "pokedex";
-$password = "20Sullca1";
-
-// Create connection
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-$sql = "select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
+$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
 from pokemon p
 join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
 from pokemon__pokemon_type ppt 
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
-group by ppt.pokemon_id)as type on type.pokemon_id = p.id";
-$result = mysqli_query($conn, $sql);
+group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
 
-$pokemones = Array();
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        $pokemon = Array();
-        $pokemon['image_path'] =  $row["image_path"];
-        $pokemon['image_path_type'] =  $row["image_path_type"];
-        $pokemon['description'] =  $row["description"];
-        $pokemon['order_number'] =  $row["order_number"];
-        $pokemon['name'] =  $row["name"];
-        $pokemon['id'] =  $row["id"];
-        $pokemones[] = $pokemon;
-    }
-}
+/*
+session_start();
 
-
-mysqli_close($conn);
+if( !isset($_SESSION["usuario"]) ){
+    header("location:index.php");
+    exit();
+}*/
 
 
 ?>
@@ -58,12 +34,12 @@ mysqli_close($conn);
     <div class="w3-container w3-teal">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-        <h1 >Usuario ADMIN</h1></div>
-   <!-- <form action="" method="post" id="Ingreso">
-        <input type="text" id="name" name="user_name" placeholder="Nombre">
-        <input type="text" id="surname" name="user_surname" placeholder="Apellido">
-        <button type="submit" name="ingresar" >ingresar</button>
-    </form>-->
+        <h1 >Usuario </h1></div>
+   <form action="logout.php" method="post" id="salir">
+        <!-- <input type="text" id="name" name="user_name" placeholder="Nombre">
+        <input type="text" id="surname" name="user_surname" placeholder="Apellido">-->
+        <button type="submit" name="salir" >Salir</button>
+    </form>
 
 </header>
 <form action="" method="post" id="Busqueda">

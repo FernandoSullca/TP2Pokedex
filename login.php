@@ -1,24 +1,26 @@
 <?php
+
 #session_start();
 
 $usuario = isset( $_POST["user_name"])?$_POST["user_name"] : "";
 $pass = isset( $_POST["user_password"])?$_POST["user_password"] : "";
 
-if (validarUsuario($usuario, $pass)){
-    #$_SESSION["usuario"] = $usuario;
 
+if (validarUsuario($usuario, $pass)){
     header("location:logueado.php");
+    #$_SESSION["usuario"] = $usuario;
 } else {
     header("location:index.php");
+    exit();
 }
-exit(1);
+
 
 function validarUsuario($usuario, $pass){
 
     $servername = "localhost";
     $username = "root";
     $dbname = "pokedex";
-    $password = "20Sullca1";
+    $password = "Ariel3009";
 
 // Create connection
     $conn = mysqli_connect($servername, $username, $password, $dbname);
