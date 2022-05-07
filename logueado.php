@@ -67,21 +67,31 @@ if( !isset($_SESSION["usuario"]) ){
             <?php
             foreach ( $pokemones as $pokemons){
             ?>
-            <tr>
-                <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
-                <td><?php
-                    foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
-                        echo "<img src =". $imagePathType.">" ; ?></td>
-                <td><?php echo $pokemons['order_number']; ?></td>
-                <td><?php echo $pokemons['name']; ?></td>
-                <td><?php echo "<button type=submit name=modificarPokemon>Modificar</button>"; ?></td>
-                <td><?php echo "<button type=submit name=eliminarPokemon>Eliminar</button>"; ?></td>
-            </tr>
-                <?php
+                <tr>
+                    <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                    <td><?php
+                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
+                            echo "<img src =". $imagePathType.">" ; ?></td>
+                    <td><?php echo $pokemons['order_number']; ?></td>
+                    <td><?php echo $pokemons['name']; ?></td>
+                    <td><form action="modifyPokemon.php" method="post">
+                            <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
+                            <input type=submit name="modifyPokemon" value="Modificar">
+                        </form>
+                    </td>
+                    <td><form action="deletePokemon.php" method="post">
+                            <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
+                            <input type=submit name="deletePokemon" value="eliminar">
+                        </form>
+                    </td>
+                </tr>
+            <?php
             }
             ?>
         </table>
-       <button  type=submit name=nuevoPokemon>Nuevo Pokemon</button>.
+        <form action="addPokemon.php" method="post">
+            <input type=submit value="Nuevo Pokemon">
+        </form>
     </div>
 
     <!-- End Page Content -->
