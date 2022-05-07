@@ -12,14 +12,14 @@ group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
 
 
 
-/*
+
 
 session_start();
 
 if( isset($_SESSION["usuario"]) ){
     header("location:logueado.php");
     exit();
-}*/
+}
 ?>
 
 

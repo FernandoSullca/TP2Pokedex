@@ -9,13 +9,13 @@ from pokemon__pokemon_type ppt
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
 
-/*
+
 session_start();
 
 if( !isset($_SESSION["usuario"]) ){
     header("location:index.php");
     exit();
-}*/
+}
 
 
 ?>
@@ -34,7 +34,7 @@ if( !isset($_SESSION["usuario"]) ){
     <div class="w3-container w3-teal">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-        <h1 >Usuario </h1></div>
+        <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1></div>
    <form action="logout.php" method="post" id="salir">
         <!-- <input type="text" id="name" name="user_name" placeholder="Nombre">
         <input type="text" id="surname" name="user_surname" placeholder="Apellido">-->
