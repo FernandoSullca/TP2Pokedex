@@ -22,12 +22,12 @@ class MySqlDatabase
         $this->disconnect();
     }
 
-    //consulta aca iria para la tabla pokemón
-    /*public function query($sql)
+    //consulta aca iria para la tabla pokemón u otro
+    public function query($sql)
     {
         $result = mysqli_query($this->conn, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }*/
+    }
 
     private function connect()
     {

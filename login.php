@@ -4,14 +4,14 @@
 $usuario = isset( $_POST["user_name"])?$_POST["user_name"] : "";
 $pass = isset( $_POST["user_password"])?$_POST["user_password"] : "";
 
-if ( validarUsuario($usuario, $pass) == TRUE){
+if (validarUsuario($usuario, $pass)){
     #$_SESSION["usuario"] = $usuario;
+
     header("location:logueado.php");
-    exit();
 } else {
     header("location:index.php");
-    exit();
 }
+exit(1);
 
 function validarUsuario($usuario, $pass){
 
@@ -34,14 +34,15 @@ function validarUsuario($usuario, $pass){
     if (mysqli_num_rows($result) > 0) {
         // output data of each row
         $row = mysqli_fetch_assoc($result);
-        echo  $row["nameU"];
-        echo  $row["passwordU"];
+
         mysqli_close($conn);
         #-------------------------
         #md5() crea/insert
         #password_verify(); verificar
-    return $usuario == $row["nameU"] &&  $pass==$row["passwordU"];
+        return $usuario == $row["nameU"] &&  md5($pass)==$row["passwordU"] ;
+        #return $usuario == $row["nameU"] &&  password_verify($pass,$row["passwordU"]) ;
     }
+
     return false;
 
 }
