@@ -37,19 +37,17 @@ if (!$result){
     }
    $sql = "SELECT * FROM usuario 
         where nameU = '$usuario'";*/
-    
-    
+
    /* if (mysqli_num_rows($result) > 0) {
         // output data of each row
         $row = mysqli_fetch_assoc($result);
-
-        */
         #-------------------------
         #md5() crea/insert
         #password_verify(); verificar
         #return $usuario == $row["nameU"] &&  md5($pass)==$row["passwordU"] ;
-        #return $usuario == $row["nameU"] &&  password_verify($pass,$row["passwordU"]) ;
-    #}
+        return $usuario == $row["nameU"] &&  password_verify($pass,$row["passwordU"]) ;
+   }
+   */
 
     #return false;
 
