@@ -1,12 +1,10 @@
 <?php
 include_once 'PokemonModel.php';
-$servername = "localhost";
-$username = "root";
-$dbname = "pokedex";
-$password = "";
+$array_ini = parse_ini_file("./configuracion/database.ini");
+//print_r($array_ini);
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());

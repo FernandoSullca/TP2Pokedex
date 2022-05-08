@@ -1,6 +1,9 @@
 <?php
 include_once("MySqlDatabase.php");
-$database = new MySqlDatabase('localhost','root','Ariel3009','pokedex');
+// Analizar sin secciones
+$array_ini = parse_ini_file("./configuracion/database.ini");
+//print_r($array_ini);
+$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 
 $pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
 from pokemon p

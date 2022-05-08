@@ -16,6 +16,14 @@
     </div>
 
 </header>
+    <div claas="contenedor-pokemon">
+        <div class="Imagen-pokemon"  >
+
+        </div>
+        <div class="nombre-tipo-pokemon" ></div>
+        <div class="descripcion-pokemon"></div>
+    </div>
+
 
 <footer>
 

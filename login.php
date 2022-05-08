@@ -1,13 +1,16 @@
 <?php
 include_once("MySqlDatabase.php");
-$database = new MySqlDatabase('localhost','root','Ariel3009','pokedex');
-session_start();
+// Analizar sin secciones
+$array_ini = parse_ini_file("./configuracion/database.ini");
+//print_r($array_ini);
+$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 
+session_start();
 $usuario = isset( $_POST["user_name"])?$_POST["user_name"] : "";
 $pass = isset( $_POST["user_password"])?$_POST["user_password"] : "";
-
+$hashpasss=md5($pass);
 $result = $database->query("SELECT * FROM usuario 
-where nameU = '$usuario' AND passwordU = '$pass'");
+where nameU = '$usuario' AND passwordU = '$hashpasss'");
 
 if (!$result){
     header("location:index.php");

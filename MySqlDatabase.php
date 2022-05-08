@@ -27,22 +27,6 @@ class MySqlDatabase
     {
         $result = mysqli_query($this->conn, $sql);
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
-/*
-  $pokemones = Array();
-    if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-        $pokemon = Array();
-        $pokemon['image_path'] =  $row["image_path"];
-        $pokemon['image_path_type'] =  $row["image_path_type"];
-        $pokemon['description'] =  $row["description"];
-        $pokemon['order_number'] =  $row["order_number"];
-        $pokemon['name'] =  $row["name"];
-        $pokemon['id'] =  $row["id"];
-        $pokemones[] = $pokemon;
-    }
-}
-return $pokemones;*/
     }
 
     private function connect()
@@ -53,7 +37,7 @@ return $pokemones;*/
             die('Conection falied: ' . mysqli_connect_error());
         }
         $this->conn = $conn;
-        echo 'Estas conectado';
+        #echo 'Estas conectado';
     }
 
     private function disconnect()
