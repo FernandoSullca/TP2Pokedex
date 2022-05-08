@@ -55,6 +55,7 @@ if (isset($_POST['modify'])) {
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->modify($conn);
         mysqli_close($conn);
+        header("location:logueado.php");
     } catch (Exception $e)
     {
         die($e->getMessage());
