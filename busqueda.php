@@ -3,30 +3,21 @@ include_once("MySqlDatabase.php");
 // Analizar sin secciones
 $array_ini = parse_ini_file("./configuracion/database.ini");
 //print_r($array_ini);
-$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+$pokebusqueda = isset( $_GET["pokemon_name"])?$_GET["pokemon_name"] : "";
 
-$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
-from pokemon p
+
+$database = new MySqlDatabase($array_ini["servername"], $array_ini["username"], $array_ini["password"], $array_ini["dbname"]);
+
+$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id,p.description
+from pokemon p 
 join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
 from pokemon__pokemon_type ppt 
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
-group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
-
-
-
-
-
+group by ppt.pokemon_id)as type on type.pokemon_id = p.id 
+WHERE p.order_number= ".$pokebusqueda." OR p.name= " .$pokebusqueda);
 
 session_start();
-
-if( isset($_SESSION["usuario"]) ){
-    header("location:logueado.php");
-    exit();
-}
 ?>
-
-
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -50,7 +41,7 @@ if( isset($_SESSION["usuario"]) ){
         <button type="submit" name="ingresar" >ingresar</button>
     </form>
 </header>
-<form action="busqueda.php" method="GET" id="">
+<form action="#" method="get" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
     <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
@@ -96,3 +87,8 @@ if( isset($_SESSION["usuario"]) ){
 </footer>
 </body>
 </html>
+
+
+
+
+
