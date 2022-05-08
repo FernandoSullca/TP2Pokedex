@@ -32,11 +32,26 @@ if (isset($_POST['modify'])) {
         $id = isset( $_POST["pokemon_id"])?$_POST["pokemon_id"] : null;
         $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
         $name = isset( $_POST["pokemon_name"])?$_POST["pokemon_name"] : "";
-        $imagePath = isset( $_POST["pokemon_image"])?$_POST["pokemon_image"] : "";
+        #$imagePath = isset( $_POST["pokemon_image"])?$_POST["pokemon_image"] : "";
         $description = isset( $_POST["pokemon_description"])?$_POST["pokemon_description"] : "";
         $weight = isset( $_POST["pokemon_weight"])?$_POST["pokemon_weight"] : null;
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
+
+        /**Magia para subir la imagen**/
+
+        $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
+
+        if($fileOrig!=null) {
+            $filePath = "./image/" . $_FILES["pokemon_image"]["name"];
+            $imagePath = $filePath;
+            move_uploaded_file($fileOrig, $filePath);
+        }
+        else
+        {
+            $imagePath="./image/default.png";
+        }
+
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->modify($conn);
         mysqli_close($conn);
@@ -56,6 +71,7 @@ if (isset($_POST['delete'])) {
         $weight = isset( $_POST["pokemon_weight"])?$_POST["pokemon_weight"] : null;
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
+
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->delete($conn);
         mysqli_close($conn);
@@ -98,8 +114,8 @@ if (isset($_POST['delete'])) {
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
-<form method="post">
-    <?php  $pokemonElegido = json_decode($_POST['pokemon'])?>
+<form enctype="multipart/form-data" method="post">
+    <?php  $pokemonElegido = isset($_POST["pokemon"])?json_decode($_POST["pokemon"]):""?>
     <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">
 
     <label for="pokemon_number">Numero</label>
