@@ -81,7 +81,6 @@ if( isset($_SESSION["usuario"]) ){
                            echo "<img src =". $imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
                     <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['order_number'].">".$pokemons['name']."</a>"; ?></td>
-                    <td><?php echo $pokemons['name']; ?></td>
                </tr>
            <?php
             }
