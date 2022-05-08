@@ -5,7 +5,7 @@ $array_ini = parse_ini_file("./configuracion/database.ini");
 
 $database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 
-$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
+$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id, p.weight,p.height, p.parent_id
 from pokemon p
 join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
 from pokemon__pokemon_type ppt 
