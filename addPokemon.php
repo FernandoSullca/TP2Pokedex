@@ -84,6 +84,17 @@ if (isset($_POST['delete'])) {
     }
 }
 
+if (isset($_POST['cancelar'])) {
+
+    try{
+        header("location:logueado.php");
+        mysqli_close($conn);
+
+    } catch (Exception $e)
+    {
+        die($e->getMessage());
+    }
+}
 ?>
 
 <!doctype html>
@@ -149,6 +160,7 @@ if (isset($_POST['delete'])) {
     <input type="text" id="pokemon_parent" name="pokemon_parent"><br><br>
 
     <input  type="submit" name="add"  id="add" value="Agregar">
+    <input  type="submit" name="cancelar"  id="cancelar" value="Cancelar">
 </form>
 </div>
 

@@ -22,7 +22,7 @@ join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_
 from pokemon__pokemon_type ppt 
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id
-WHERE p.name= '$pokebusqueda' or p.order_number='$pokebusqueda'  or type.description='$pokebusqueda'"));
+WHERE p.name= '$pokebusqueda' or p.order_number='$pokebusqueda'  or type.description like '$pokebusqueda'"));
 
 session_start();
 

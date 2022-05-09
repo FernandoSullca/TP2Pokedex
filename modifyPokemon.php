@@ -1,5 +1,6 @@
 <?php
 include_once 'PokemonModel.php';
+
 $array_ini = parse_ini_file("./configuracion/database.ini");
 //print_r($array_ini);
 
@@ -81,6 +82,18 @@ if (isset($_POST['delete'])) {
         die($e->getMessage());
     }
 }
+if (isset($_POST['cancelar'])) {
+
+    try{
+        header("location:logueado.php");
+        mysqli_close($conn);
+
+    } catch (Exception $e)
+    {
+        die($e->getMessage());
+    }
+}
+
 session_start();
 ?>
 
@@ -135,6 +148,7 @@ session_start();
     <input type="text" id="pokemon_parent" name="pokemon_parent" value="<?php echo $pokemonElegido->parent_id; ?>"><br><br>
 
     <input  type="submit" name="modify"  id="modify" value="modify">
+    <input  type="submit" name="cancelar"  id="cancelar" value="Cancelar">
 </form>
 </div>
 </body>
