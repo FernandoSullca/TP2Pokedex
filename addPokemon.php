@@ -25,7 +25,6 @@ if (isset($_POST['add'])) {
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
         $type   = isset( $_POST["pokemon_type"])?$_POST["pokemon_type"] : null;
         /**Magia para subir la imagen**/
-        var_dump($type);
         $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
 
         if($fileOrig!=null) {
