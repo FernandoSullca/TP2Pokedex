@@ -4,21 +4,16 @@ include_once("MySqlDatabase.php");
 $array_ini = parse_ini_file("./configuracion/database.ini");
 //print_r($array_ini);
 $pokebusqueda = isset( $_GET["pokemon_name"])?$_GET["pokemon_name"] : "";
-//var_dump($_GET["pokemon_name"]);
-/*var_dump(is_string($pokebusqueda));
-var_dump(gettype($_GET["pokemon_name"]));*/
-if(is_string($pokebusqueda)){
+
+/*if(is_string($pokebusqueda)){
     $pokeString=$pokebusqueda;
     $pokenumber="";
 }
 else{
     $pokeString="";
     $pokenumber=$pokebusqueda;
-}
-echo "v_D String";
-var_dump($pokeString);
-echo "v_D number";
-var_dump($pokenumber);
+}*/
+
 $database = new MySqlDatabase($array_ini["servername"], $array_ini["username"], $array_ini["password"], $array_ini["dbname"]);
 
 $pokemones = $database->query(sprintf("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id,p.description
@@ -29,10 +24,6 @@ join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id
 WHERE p.name= '$pokebusqueda' or p.order_number='$pokebusqueda'  or type.description='$pokebusqueda'"));
 
-var_dump("%$pokebusqueda");
-var_dump("'".$pokebusqueda."'");
-
-var_dump($pokemones);
 session_start();
 ?>
 <!doctype html>
