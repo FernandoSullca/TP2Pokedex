@@ -1,6 +1,9 @@
 <?php
 include_once("MySqlDatabase.php");
-$database = new MySqlDatabase('localhost','root','Ariel3009','pokedex');
+// Analizar sin secciones
+$array_ini = parse_ini_file("./configuracion/database.ini");
+//print_r($array_ini);
+$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 
 $pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
 from pokemon p
@@ -17,7 +20,7 @@ group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
 session_start();
 
 if( isset($_SESSION["usuario"]) ){
-    header("location:logueado.php");
+    /*header("location:logueado.php");*/
     exit();
 }
 ?>
@@ -72,12 +75,12 @@ if( isset($_SESSION["usuario"]) ){
             foreach ( $pokemones as $pokemons){
             ?>
                <tr>
-                    <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                   <td><?php echo "<img src =". $pokemons['image_path']." >" ;?></td>
                    <td><?php
                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
-                           echo "<img src =". $imagePathType.">" ; ?></td>
+                           echo "<img src =".$imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
-                    <td><?php echo $pokemons['name']; ?></td>
+                    <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['order_number'].">".$pokemons['name']."</a>"; ?></td>
                </tr>
            <?php
             }

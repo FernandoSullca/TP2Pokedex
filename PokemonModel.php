@@ -40,7 +40,7 @@ class PokemonModel
                     $this->parent
                 );
             $stmt->execute();
-//            var_dump($stmt);
+           var_dump($stmt);
             /*$pokemon = $this->get($database);
             $sql = "INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id)";
             $database->prepare($sql)->execute($pokemon->id,$this->type);*/

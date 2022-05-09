@@ -1,13 +1,10 @@
 <?php
 include_once 'PokemonModel.php';
-$servername = "localhost";
-$username = "root";
-$dbname = "pokedex";
-$password = "";
+session_start();
+// Create connection
+$array_ini = parse_ini_file("./configuracion/database.ini");
 
-// Create connection
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -15,6 +12,7 @@ if (!$conn) {
 
 if (isset($_POST['add'])) {
     try{
+
         $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
         $name = isset( $_POST["pokemon_name"])?$_POST["pokemon_name"] : "";
         $imagePath = isset( $_POST["pokemon_image"])?$_POST["pokemon_image"] : "";
@@ -22,9 +20,24 @@ if (isset($_POST['add'])) {
         $weight = isset( $_POST["pokemon_weight"])?$_POST["pokemon_weight"] : null;
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
+        /**Magia para subir la imagen**/
+
+        $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
+
+        if($fileOrig!=null) {
+            $filePath = "./image/" . $_FILES["pokemon_image"]["name"];
+            $imagePath = $filePath;
+
+            move_uploaded_file($fileOrig, $filePath);
+        }
+        else
+        {
+            $imagePath="./image/default.png";
+        }
         $pokemon = new PokemonModel(null, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->add($conn);
         mysqli_close($conn);
+        header("location:logueado.php");
         } catch (Exception $e)
         {
             die($e->getMessage());
@@ -43,6 +56,7 @@ if (isset($_POST['modify'])) {
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->modify($conn);
         mysqli_close($conn);
+
     } catch (Exception $e)
     {
         die($e->getMessage());
@@ -79,19 +93,15 @@ if (isset($_POST['delete'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>TP Pokedex-index</title>
+
 </head>
 <body>
 <header>
     <div class="w3-container w3-teal">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-    <form action="login.php" method="post" id="Ingreso">
-        <!--<label for="name">Nombre</label>-->
-        <input type="text" id="name" name="user_name" placeholder="Nombre">
-        <!-- <label for="surname">Apellido</label>-->
-        <input type="text" id="password" name="user_password" placeholder="Password">
-        <button type="submit" name="ingresar" >ingresar</button>
-    </form>
+    <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1></div>
+
 </header>
 
 <form action="login.php" method="post" id="Busqueda">
@@ -101,7 +111,8 @@ if (isset($_POST['delete'])) {
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
-<form method="post">
+
+<form enctype="multipart/form-data" method="post">
 
     <label for="pokemon_number">Numero</label>
     <input type="number" id="pokemon_number" name="pokemon_number"><br><br>
@@ -110,7 +121,7 @@ if (isset($_POST['delete'])) {
     <input type="text" id="pokemon_name" name="pokemon_name"><br><br>
 
     <label for="imagePath">Imagen</label>
-    <input type="file" id="pokemon_image" accept="image/*" name="pokemon_image"><br><br>
+    <input type="FILE" id="pokemon_image" accept="image/*" name="pokemon_image"><br><br>
 
     <label for="pokemon_description">Descripcion</label>
     <input type="text" id="pokemon_description" name="pokemon_description"><br><br>

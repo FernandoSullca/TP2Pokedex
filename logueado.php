@@ -1,14 +1,16 @@
 <?php
 include_once("MySqlDatabase.php");
-$database = new MySqlDatabase('localhost','root','Ariel3009','pokedex');
 
-$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
+$array_ini = parse_ini_file("./configuracion/database.ini");
+
+$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+
+$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id, p.weight,p.height, p.parent_id
 from pokemon p
 join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
 from pokemon__pokemon_type ppt 
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
-
 
 session_start();
 
@@ -74,12 +76,12 @@ if( !isset($_SESSION["usuario"]) ){
                             echo "<img src =". $imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
                     <td><?php echo $pokemons['name']; ?></td>
-                    <td><form action="modifyPokemon.php" method="post">
+                    <td><form enctype="multipart/form-data" action="modifyPokemon.php" method="post">
                             <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
                             <input type=submit name="modifyPokemon" value="Modificar">
                         </form>
                     </td>
-                    <td><form action="deletePokemon.php" method="post">
+                    <td><form enctype="multipart/form-data" action="deletePokemon.php" method="post">
                             <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
                             <input type=submit name="deletePokemon" value="eliminar">
                         </form>
@@ -89,7 +91,7 @@ if( !isset($_SESSION["usuario"]) ){
             }
             ?>
         </table>
-        <form action="addPokemon.php" method="post">
+        <form enctype="multipart/form-data" action="addPokemon.php" method="post">
             <input type=submit value="Nuevo Pokemon">
         </form>
     </div>
