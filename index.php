@@ -60,8 +60,8 @@ if( isset($_SESSION["usuario"]) ){
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-    <!-- The Band Section -->
-    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <!-- The Pokemon-table Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="poke">
         <h2 class="w3-wide">Info Pokemones</h2>
         <table class="w3-table">
             <tr>

@@ -35,7 +35,7 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>TP Pokedex-index</title>
+    <title>TP Pokedex-Busqueda</title>
 </head>
 <body>
 <header>
@@ -72,7 +72,7 @@ echo "<form action='logout.php' method='post' id='salir'>
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-    <!-- The Band Section -->
+    <!-- The Pokemon-table-Busqueda Section -->
     <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
         <h2 class="w3-wide">Info Pokemones</h2>
         <table class="w3-table">
