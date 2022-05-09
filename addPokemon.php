@@ -1,6 +1,6 @@
 <?php
 include_once 'PokemonModel.php';
-
+session_start();
 // Create connection
 $array_ini = parse_ini_file("./configuracion/database.ini");
 
@@ -93,19 +93,15 @@ if (isset($_POST['delete'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>TP Pokedex-index</title>
+
 </head>
 <body>
 <header>
     <div class="w3-container w3-teal">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-    <form action="login.php" method="post" id="Ingreso">
-        <!--<label for="name">Nombre</label>-->
-        <input type="text" id="name" name="user_name" placeholder="Nombre">
-        <!-- <label for="surname">Apellido</label>-->
-        <input type="text" id="password" name="user_password" placeholder="Password">
-        <button type="submit" name="ingresar" >ingresar</button>
-    </form>
+    <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1></div>
+
 </header>
 
 <form action="login.php" method="post" id="Busqueda">
@@ -115,6 +111,7 @@ if (isset($_POST['delete'])) {
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
+
 <form enctype="multipart/form-data" method="post">
 
     <label for="pokemon_number">Numero</label>
