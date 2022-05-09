@@ -37,10 +37,10 @@ if (isset($_POST['modify'])) {
         $weight = isset( $_POST["pokemon_weight"])?$_POST["pokemon_weight"] : null;
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
-
+        $imagePath =isset( $_POST["pokemon_image"])?$_POST["pokemon_image"] : null;
         /**Magia para subir la imagen**/
 
-        $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
+   /*     $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
 
         if($fileOrig!=null) {
             $filePath = "./image/" . $_FILES["pokemon_image"]["name"];
@@ -50,11 +50,12 @@ if (isset($_POST['modify'])) {
         else
         {
             $imagePath="./image/default.png";
-        }
+        }*/
 
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->modify($conn);
         mysqli_close($conn);
+        header("location:logueado.php");
     } catch (Exception $e)
     {
         die($e->getMessage());
@@ -80,7 +81,7 @@ if (isset($_POST['delete'])) {
         die($e->getMessage());
     }
 }
-
+session_start();
 ?>
 
 <!doctype html>
@@ -98,13 +99,7 @@ if (isset($_POST['delete'])) {
     <div class="w3-container w3-teal">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-    <form action="login.php" method="post" id="Ingreso">
-        <!--<label for="name">Nombre</label>-->
-        <input type="text" id="name" name="user_name" placeholder="Nombre">
-        <!-- <label for="surname">Apellido</label>-->
-        <input type="text" id="password" name="user_password" placeholder="Password">
-        <button type="submit" name="ingresar" >ingresar</button>
-    </form>
+        <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1></div>
 </header>
 
 <form action="login.php" method="post" id="Busqueda">

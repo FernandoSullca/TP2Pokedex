@@ -76,12 +76,12 @@ if( !isset($_SESSION["usuario"]) ){
                             echo "<img src =". $imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
                     <td><?php echo $pokemons['name']; ?></td>
-                    <td><form action="modifyPokemon.php" method="post">
+                    <td><form enctype="multipart/form-data" action="modifyPokemon.php" method="post">
                             <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
                             <input type=submit name="modifyPokemon" value="Modificar">
                         </form>
                     </td>
-                    <td><form action="deletePokemon.php" method="post">
+                    <td><form enctype="multipart/form-data" action="deletePokemon.php" method="post">
                             <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
                             <input type=submit name="deletePokemon" value="eliminar">
                         </form>
@@ -91,7 +91,7 @@ if( !isset($_SESSION["usuario"]) ){
             }
             ?>
         </table>
-        <form action="addPokemon.php" method="post">
+        <form enctype="multipart/form-data" action="addPokemon.php" method="post">
             <input type=submit value="Nuevo Pokemon">
         </form>
     </div>

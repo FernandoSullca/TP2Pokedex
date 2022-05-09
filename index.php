@@ -20,7 +20,7 @@ group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
 session_start();
 
 if( isset($_SESSION["usuario"]) ){
-    header("location:logueado.php");
+    /*header("location:logueado.php");*/
     exit();
 }
 ?>
@@ -75,10 +75,10 @@ if( isset($_SESSION["usuario"]) ){
             foreach ( $pokemones as $pokemons){
             ?>
                <tr>
-                    <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                   <td><?php echo "<img src =". $pokemons['image_path']." >" ;?></td>
                    <td><?php
                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
-                           echo "<img src =". $imagePathType.">" ; ?></td>
+                           echo "<img src =".$imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
                     <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['order_number'].">".$pokemons['name']."</a>"; ?></td>
                </tr>
