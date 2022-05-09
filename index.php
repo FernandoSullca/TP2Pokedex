@@ -52,7 +52,7 @@ if( isset($_SESSION["usuario"]) ){
 </header>
 <form action="busqueda.php" method="GET" id="">
     <!--<label for="name">Nombre</label>-->
-    <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
 </form>
 
