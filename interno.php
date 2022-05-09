@@ -48,7 +48,7 @@ session_start();
         <div class="nombre-tipo-pokemon" ></div>
         <div class="descripcion-pokemon"></div>
     </div>
-
+    
 <?php
 foreach ( $pokemones as $pokemons){
 ?>
@@ -66,7 +66,10 @@ foreach ( $pokemones as $pokemons){
             ?>
 
 <footer>
+<form action="index.php" method="post" id="salir">
 
+        <button type="submit" name="salir" >Volver</button>
+    </form>
 </footer>
 </body>
 </html>

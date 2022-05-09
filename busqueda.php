@@ -25,6 +25,7 @@ group by ppt.pokemon_id)as type on type.pokemon_id = p.id
 WHERE p.name= '$pokebusqueda' or p.order_number='$pokebusqueda'  or type.description='$pokebusqueda'"));
 
 session_start();
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -41,20 +42,32 @@ session_start();
     <div class="w3-container w3-teal">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-    <form action="login.php" method="post" id="Ingreso">
-        <!--<label for="name">Nombre</label>-->
-        <input type="text" id="name" name="user_name" placeholder="Nombre">
-        <!-- <label for="surname">Apellido</label>-->
-        <input type="text" id="password" name="user_password" placeholder="Password">
-        <button type="submit" name="ingresar" >ingresar</button>
-    </form>
+        <h1 > <?php  if( isset($_SESSION["usuario"]) ){
+            echo $_SESSION["usuario"];}?> </h1></div>
+        <?php
+        if( !isset($_SESSION["usuario"]) ){
+    echo " <form action='login.php' method='post' id='Ingreso'>
+    
+    <input type='text' id='name' name='user_name' placeholder='Nombre'>
+    
+    <input type='text' id='password' name='user_password' placeholder='Password'>
+    <button type='submit' name='ingresar' >ingresar</button>
+</form>";
+   
+}?>
+
 </header>
 <form action="#" method="get" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
     <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
-</form>
-
+</form>        
+<?php
+if( isset($_SESSION["usuario"]) ){
+echo "<form action='logout.php' method='post' id='salir'>
+ 
+        <button type='submit' name='salir' >Salir</button>"; }
+?>        
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
