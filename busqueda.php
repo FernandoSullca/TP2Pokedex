@@ -23,7 +23,6 @@ from pokemon__pokemon_type ppt
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id
 WHERE p.name= '$pokebusqueda' or p.order_number='$pokebusqueda'  or type.description like '$pokebusqueda'"));
-
 session_start();
 
 ?>
@@ -75,6 +74,17 @@ echo "<form action='logout.php' method='post' id='salir'>
     <!-- The Pokemon-table-Busqueda Section -->
     <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
         <h2 class="w3-wide">Info Pokemones</h2>
+        <?php
+        if($pokemones==null){
+            echo "<h3>No se encontraron pokemones</h3> ";
+            $pokemones = $database->query(sprintf("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id,p.description
+from pokemon p 
+join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
+from pokemon__pokemon_type ppt 
+join pokemon_type pt on pt.id = ppt.pokemon_type_id
+group by ppt.pokemon_id)as type on type.pokemon_id = p.id"));
+        }
+        ?>
         <table class="w3-table">
             <tr>
                 <th>Imagen</th>
