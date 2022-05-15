@@ -29,20 +29,21 @@ if( !isset($_SESSION["usuario"]) ){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/style-master.css">
     <title>TP Pokedex-Usuario ADMIN logueado</title>
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal">
+    <div class="w3-container w3-teal contenedor">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1></div>
-        <h1 > <?php echo $_SESSION["usuario"]?> </h1></div>
-   <form action="logout.php" method="post" id="salir">
+        <h1 >Pokedex</h1>
+        <h1 > <?php echo "Usuario Admin :". $_SESSION["usuario"]?> </h1>
+        <form action="logout.php" method="post" id="salir">
         <!-- <input type="text" id="name" name="user_name" placeholder="Nombre">
         <input type="text" id="surname" name="user_surname" placeholder="Apellido">-->
         <button type="submit" name="salir" >Salir</button>
-    </form>
-
+        </form>
+    </div>
 </header>
 <form action="busqueda.php" method="post" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
@@ -75,7 +76,7 @@ if( !isset($_SESSION["usuario"]) ){
                         foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                             echo "<img src =". $imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
-                    <td><?php echo $pokemons['name']; ?></td>
+                    <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['order_number'].">".$pokemons['name']."</a>"; ?></td>
                     <td><form enctype="multipart/form-data" action="modifyPokemon.php" method="post">
                             <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
                             <input type=submit name="modifyPokemon" value="Modificar">

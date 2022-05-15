@@ -3,7 +3,12 @@ include_once("MySqlDatabase.php");
 // Analizar sin secciones
 $array_ini = parse_ini_file("./configuracion/database.ini");
 //print_r($array_ini);
-$pokebusqueda = isset( $_GET["pokemon_name"])?$_GET["pokemon_name"] : "";
+$exception=false;
+$pokebusqueda = isset( $_GET["pokemon_name"])?$_GET["pokemon_name"] :null;
+if($pokebusqueda==null)
+{
+    $exception=true;
+}
 
 /*if(is_string($pokebusqueda)){
     $pokeString=$pokebusqueda;
@@ -34,15 +39,19 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/style-master.css">
     <title>TP Pokedex-Busqueda</title>
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal">
+    <div class="w3-container w3-teal contenedor">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1></div>
-        <h1 > <?php  if( isset($_SESSION["usuario"]) ){
-            echo $_SESSION["usuario"];}?> </h1></div>
+        <h1>Pokedex</h1>
+       <?php  if( isset($_SESSION["usuario"]) ){
+            echo   "<h1 > Usuario Admin: ".$_SESSION["usuario"]."</h1>
+                    <form action='logout.php' method='post' id='salir'>
+                    <button type='submit' name='salir' >Salir</button>
+                    </form>";}?>
         <?php
         if( !isset($_SESSION["usuario"]) ){
     echo " <form action='login.php' method='post' id='Ingreso'>
@@ -52,21 +61,16 @@ session_start();
     <input type='text' id='password' name='user_password' placeholder='Password'>
     <button type='submit' name='ingresar' >ingresar</button>
 </form>";
-   
-}?>
+}?></div>
 
 </header>
+
 <form action="#" method="get" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
     <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
 </form>        
-<?php
-if( isset($_SESSION["usuario"]) ){
-echo "<form action='logout.php' method='post' id='salir'>
- 
-        <button type='submit' name='salir' >Salir</button>"; }
-?>        
+
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
@@ -76,7 +80,8 @@ echo "<form action='logout.php' method='post' id='salir'>
         <h2 class="w3-wide">Info Pokemones</h2>
         <?php
         if($pokemones==null){
-            echo "<h3>No se encontraron pokemones</h3> ";
+            if(!$exception) echo "<h3>Pokemon no encontrado</h3> ";
+
             $pokemones = $database->query(sprintf("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id,p.description
 from pokemon p 
 join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
