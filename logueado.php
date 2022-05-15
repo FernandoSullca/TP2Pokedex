@@ -71,7 +71,7 @@ if( !isset($_SESSION["usuario"]) ){
             foreach ( $pokemones as $pokemons){
             ?>
                 <tr>
-                    <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                    <td class="imagenPokemon"><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
                     <td><?php
                         foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                             echo "<img src =". $imagePathType.">" ; ?></td>
