@@ -40,7 +40,7 @@ if( isset($_SESSION["usuario"]) ){
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal contenedor">
+
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1>
         <form action="login.php" method="post" id="Ingreso">
@@ -50,7 +50,7 @@ if( isset($_SESSION["usuario"]) ){
             <input type="text" id="password" name="user_password" placeholder="Password">
             <button type="submit" name="ingresar" >ingresar</button>
         </form>
-    </div>
+
 
 </header>
 <form action="busqueda.php" method="GET" id="buscador">

@@ -35,10 +35,10 @@ session_start();
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal">
+
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1>Pokedex</h1>
-    </div>
+
 
 </header>
     <div claas="contenedor-pokemon">
