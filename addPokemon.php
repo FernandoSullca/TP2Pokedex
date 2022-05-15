@@ -5,6 +5,9 @@ session_start();
 $array_ini = parse_ini_file("./configuracion/database.ini");
 
 $conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+$query = "select * from pokemon_type type";
+$result = mysqli_query($conn, $query);
+$types =  mysqli_fetch_all($result, MYSQLI_ASSOC);
 // Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -20,8 +23,8 @@ if (isset($_POST['add'])) {
         $weight = isset( $_POST["pokemon_weight"])?$_POST["pokemon_weight"] : null;
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
+        $type   = isset( $_POST["pokemon_type"])?$_POST["pokemon_type"] : null;
         /**Magia para subir la imagen**/
-
         $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
 
         if($fileOrig!=null) {
@@ -34,7 +37,7 @@ if (isset($_POST['add'])) {
         {
             $imagePath="./image/default.png";
         }
-        $pokemon = new PokemonModel(null, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
+        $pokemon = new PokemonModel(null, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, $type);
         $pokemon->add($conn);
         mysqli_close($conn);
         header("location:logueado.php");
@@ -56,7 +59,6 @@ if (isset($_POST['modify'])) {
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->modify($conn);
         mysqli_close($conn);
-
     } catch (Exception $e)
     {
         die($e->getMessage());
@@ -82,6 +84,17 @@ if (isset($_POST['delete'])) {
     }
 }
 
+if (isset($_POST['cancelar'])) {
+
+    try{
+        header("location:logueado.php");
+        mysqli_close($conn);
+
+    } catch (Exception $e)
+    {
+        die($e->getMessage());
+    }
+}
 ?>
 
 <!doctype html>
@@ -92,15 +105,16 @@ if (isset($_POST['delete'])) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>TP Pokedex-index</title>
+    <link rel="stylesheet" href="css/style-master.css">
+    <title>TP Pokedex-Agregar Pokemon</title>
 
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal">
+
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-    <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1></div>
+    <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1>
 
 </header>
 
@@ -111,13 +125,24 @@ if (isset($_POST['delete'])) {
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
-
 <form enctype="multipart/form-data" method="post">
 
     <label for="pokemon_number">Numero</label>
     <input type="number" id="pokemon_number" name="pokemon_number"><br><br>
 
-    <label for="pokemon_name">Nombre</label>
+    <?php
+    if (count($types)>0)
+    {
+    echo 'Tipo : <select name="pokemon_type">
+        <option value=" " selected="selected">Seleccionar</option>';
+        foreach($types as $type)
+        {
+        echo '<option value="'.$type['id'].'">'.$type['description'].'</option>';
+        }
+        echo '</select>';
+    }
+    ?>
+    <br><br><label for="pokemon_name">Nombre</label>
     <input type="text" id="pokemon_name" name="pokemon_name"><br><br>
 
     <label for="imagePath">Imagen</label>
@@ -136,6 +161,7 @@ if (isset($_POST['delete'])) {
     <input type="text" id="pokemon_parent" name="pokemon_parent"><br><br>
 
     <input  type="submit" name="add"  id="add" value="Agregar">
+    <input  type="submit" name="cancelar"  id="cancelar" value="Cancelar">
 </form>
 </div>
 

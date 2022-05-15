@@ -19,9 +19,6 @@
 -- Table structure for table `pokemon`
 --
 
-CREATE DATABASE pokedex;
-USE pokedex;
-
 DROP TABLE IF EXISTS `pokemon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -35,9 +32,8 @@ CREATE TABLE `pokemon` (
   `height` float DEFAULT NULL,
   `parent_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_parent__pokemon_id` (`parent_id`),
-  CONSTRAINT `fk_parent__pokemon_id` FOREIGN KEY (`parent_id`) REFERENCES `pokemon` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  KEY `fk_parent__pokemon_id` (`parent_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +42,7 @@ CREATE TABLE `pokemon` (
 
 LOCK TABLES `pokemon` WRITE;
 /*!40000 ALTER TABLE `pokemon` DISABLE KEYS */;
-INSERT INTO `pokemon` VALUES (1,1,'./image/Bulbasaur.png','Bulbasaur','Bulbasaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Squirtle y Charmander (excepto en Pokémon Amarillo)',50,50,NULL),(2,2,'./image/Ivysaur.png','Ivysaur','Ivysaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Bulbasaur, uno de los Pokémon iniciales de Kanto.',130,10,1),(3,3,'./image/Venusaur.png','Venusaur','Venusaur es un Pokémon de tipo planta/veneno introducido en la primera generación. Es la evolución de Ivysaur y, a partir de la sexta generación, puede megaevolucionar en Mega-Venusaur.',1000,20,2),(4,4,'./image/Charmander.webp','Charmander','Charmander es un Pokémon de tipo fuego introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Bulbasaur y Squirtle',85,6,NULL),(5,5,'./image/Charmander.webp','Charmeleon','Charmeleon es un Pokémon de tipo fuego introducido en la primera generación. Es la evolución de Charmander, uno de los Pokémon iniciales de los entrenadores que comienzan su aventura en la región de Kanto.',190,11,4),(6,6,'./image/Charizard.webp','Charizard','Charizard es un Pokémon de tipo fuego/volador, introducido en la primera generación. Es la evolución de Charmeleon y, a partir de la sexta generación, puede megaevolucionar en Mega-Charizard X o en Mega-Charizard Y.',905,17,5),(7,7,'./image/Squirtle.webp','Squirtle','Squirtle es un Pokémon de tipo agua introducido en la primera generación. Es uno de los Pokémon iniciales que pueden elegir los entrenadores que empiezan su aventura en la región Kanto, junto a Bulbasaur y Charmander, excepto en Pokémon Amarillo.',90,5,NULL),(8,8,'./image/Wartortle.webp','Wartortle','Wartortle es un Pokémon de tipo agua introducido en la primera generación. Es la forma evolucionada de Squirtle, uno de los Pokémon iniciales de Kanto.',225,10,7),(9,9,'./image/Blastoise.webp','Blastoise','Blastoise es un Pokémon de tipo agua introducido en la primera generación. Es la evolución de Wartortle y, a partir de la sexta generación, puede megaevolucionar en Mega-Blastoise.',855,16,8);
+INSERT INTO `pokemon` VALUES (5,5,'./image/Charmander.webp','Charmeleon','Charmeleon es un Pokémon de tipo fuego introducido en la primera generación. Es la evolución de Charmander, uno de los Pokémon iniciales de los entrenadores que comienzan su aventura en la región de Kanto.',190,11,4),(6,6,'./image/Charizard.webp','Charizard','Charizard es un Pokémon de tipo fuego/volador, introducido en la primera generación. Es la evolución de Charmeleon y, a partir de la sexta generación, puede megaevolucionar en Mega-Charizard X o en Mega-Charizard Y.',905,17,5),(7,7,'image/Squirtle.webp','Squirtle','Agua',90,5,0),(8,8,'./image/Wartortle.webp','Wartortle','Agua',225,10,7),(42,1,'./image/default.png','prueba','cualquiera',0,0,0),(43,1,'./image/default.png','prueba','cualquiera',0,0,0),(49,10,'./image/Caterpie.webp','Caterpie','Caterpie es un Pokémon de tipo bicho introducido en la primera generación. Es la contraparte de Weedle.',39,3,NULL),(50,11,'./image/Metapod.webp','Metapod','Metapod es un Pokémon de tipo bicho introducido en la primera generación. Es la evolución de Caterpie. Es la contraparte de Kakuna..',99,7,10),(51,12,'./image/Butterfree.webp','Butterfree','Butterfree es un Pokémon tipo bicho/volador introducido en la primera generación. Es la evolución de Metapod. Es la contraparte de Beedrill.',320,11,11),(52,13,'./image/Weedle.webp','Weedle','Weedle es un Pokémon del tipo bicho/veneno introducido en la primera generación. Es la contraparte de Caterpie.',32,3,NULL),(53,14,'./image/Kakuna.webp','Kakuna','Kakuna es un Pokémon tipo bicho/veneno introducido en la primera generación. Es la evolución de Weedle. Es la contraparte de Metapod.',100,6,13),(54,15,'./image/Beedrill.webp','Beedrill','Beedrill es un Pokémon de tipo bicho/veneno introducido en la primera generación. Es la evolución de Kakuna. A partir de Pokémon Rubí Omega y Pokémon Zafiro Alfa puede megaevolucionar en Mega-Beedrill. Es la contraparte de Butterfree.',295,10,14),(55,16,'./image/Pidgey.webp','Pidgey','Pidgey es un Pokémon de tipo normal/volador introducido en la primera generación.',18,3,NULL),(56,17,'./image/Pidgeotto.webp','Pidgeotto','Pidgeotto es un Pokémon introducido en la primera generación. Es de tipo normal/volador. Es la forma evolucionada de Pidgey.',300,11,16),(57,18,'./image/Pidgeot.webp','Pidgeot','Pidgeot es un Pokémon del tipo normal/volador introducido en la primera generación. Es la forma evolucionada de Pidgeotto. A partir de Pokémon Rubí Omega y Pokémon Zafiro Alfa puede megaevolucionar en Mega-Pidgeot.',395,15,17);
 /*!40000 ALTER TABLE `pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -73,7 +69,7 @@ CREATE TABLE `pokemon__pokemon_type` (
 
 LOCK TABLES `pokemon__pokemon_type` WRITE;
 /*!40000 ALTER TABLE `pokemon__pokemon_type` DISABLE KEYS */;
-INSERT INTO `pokemon__pokemon_type` VALUES (1,1),(1,2),(2,1),(2,2),(3,1),(3,2),(4,3),(5,3),(6,3),(6,4),(7,5),(8,5),(9,5);
+INSERT INTO `pokemon__pokemon_type` VALUES (5,3),(6,3),(6,4),(7,5),(8,5),(49,6),(50,6),(51,6),(51,4),(52,6),(52,2),(53,6),(53,2),(54,6),(54,2),(55,7),(55,4),(56,7),(56,4),(57,6),(57,2);
 /*!40000 ALTER TABLE `pokemon__pokemon_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +94,7 @@ CREATE TABLE `pokemon_type` (
 
 LOCK TABLES `pokemon_type` WRITE;
 /*!40000 ALTER TABLE `pokemon_type` DISABLE KEYS */;
-INSERT INTO `pokemon_type` VALUES (1,'Planta','https://static.wikia.nocookie.net/espokemon/images/d/d6/Tipo_planta.gif/revision/latest/scale-to-width-down/48?cb=20170114100444'),(2,'Veneno','https://static.wikia.nocookie.net/espokemon/images/1/10/Tipo_veneno.gif/revision/latest/scale-to-width-down/48?cb=20170114100535'),(3,'Fuego','https://static.wikia.nocookie.net/espokemon/images/c/ce/Tipo_fuego.gif/revision/latest/scale-to-width-down/48?cb=20170114100331'),(4,'Volador','https://static.wikia.nocookie.net/espokemon/images/1/10/Tipo_veneno.gif/revision/latest/scale-to-width-down/48?cb=20170114100535'),(5,'Agua','https://static.wikia.nocookie.net/espokemon/images/9/94/Tipo_agua.gif/revision/latest/scale-to-width-down/48?cb=20170114100152'),(6,'Bicho','https://static.wikia.nocookie.net/espokemon/images/f/fe/Tipo_bicho.gif/revision/latest/scale-to-width-down/48?cb=20170114100153'),(7,'Normal','https://static.wikia.nocookie.net/espokemon/images/3/32/Tipo_normal.gif/revision/latest/scale-to-width-down/48?cb=20170114100442'),(8,'Electrico','https://static.wikia.nocookie.net/espokemon/images/1/1b/Tipo_el%C3%A9ctrico.gif/revision/latest/scale-to-width-down/48?cb=20170114100155'),(9,'Hada','https://static.wikia.nocookie.net/espokemon/images/b/bc/Tipo_hada.gif/revision/latest/scale-to-width-down/48?cb=20170114100332'),(10,'Tierra','https://static.wikia.nocookie.net/espokemon/images/1/1d/Tipo_tierra.gif/revision/latest/scale-to-width-down/48?cb=20170114100533'),(11,'Lucha','https://static.wikia.nocookie.net/espokemon/images/b/b7/Tipo_lucha.gif/revision/latest/scale-to-width-down/48?cb=20170114100336'),(12,'Psiquico','https://static.wikia.nocookie.net/espokemon/images/1/15/Tipo_ps%C3%ADquico.gif/revision/latest/scale-to-width-down/48?cb=20170114100445'),(13,'Roca','https://static.wikia.nocookie.net/espokemon/images/e/e0/Tipo_roca.gif/revision/latest/scale-to-width-down/48?cb=20170114100446'),(14,'Acero','https://static.wikia.nocookie.net/espokemon/images/d/d9/Tipo_acero.gif/revision/latest/scale-to-width-down/48?cb=20170114100151'),(15,'Hielo','https://static.wikia.nocookie.net/espokemon/images/4/40/Tipo_hielo.gif/revision/latest/scale-to-width-down/48?cb=20170114100333'),(16,'Fantasma','https://static.wikia.nocookie.net/espokemon/images/4/47/Tipo_fantasma.gif/revision/latest/scale-to-width-down/48?cb=20170114100329'),(17,'Dragon','https://static.wikia.nocookie.net/espokemon/images/0/01/Tipo_drag%C3%B3n.gif/revision/latest/scale-to-width-down/48?cb=20170114100154');
+INSERT INTO `pokemon_type` VALUES (1,'Planta','./image/type/Tipo_planta.webp'),(2,'Veneno','./image/type/Tipo_veneno.webp'),(3,'Fuego','./image/type/Tipo_fuego.webp'),(4,'Volador','./image/type/Tipo_volador.webp'),(5,'Agua','./image/type/Tipo_agua.webp'),(6,'Bicho','./image/type/Tipo_bicho.webp'),(7,'Normal','./image/type/Tipo_normal.webp'),(8,'Electrico','./image/type/Tipo_electrico.webp'),(9,'Hada','./image/type/Tipo_hada.webp'),(10,'Tierra','./image/type/Tipo_tierra.webp'),(11,'Lucha','./image/type/Tipo_lucha.webp'),(12,'Psiquico','./image/type/Tipo_psiquico.webp'),(13,'Roca','./image/type/Tipo_roca.webp'),(14,'Acero','./image/type/Tipo_acero.webp'),(15,'Hielo','./image/type/Tipo_hielo.webp'),(16,'Fantasma','./image/type/Tipo_fantasma.webp'),(17,'Dragon','./image/type/Tipo_dragon.webp');
 /*!40000 ALTER TABLE `pokemon_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +114,7 @@ CREATE TABLE `usuario` (
   UNIQUE KEY `idUsuarios_UNIQUE` (`idUsuarios`),
   UNIQUE KEY `nameU_UNIQUE` (`nameU`),
   UNIQUE KEY `passwordU_UNIQUE` (`passwordU`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +123,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Sullca','203784',1),(2,'Alumno','alumno',0);
+INSERT INTO `usuario` VALUES (1,'Sullca','203784',1),(2,'Alumno','alumno',0),(3,'Hash','81dc9bdb52d04dc20036dbd8313ed055',1);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -140,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-04 16:58:14
+-- Dump completed on 2022-05-12  0:36:20

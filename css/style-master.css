@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    border: 0;
+}
+header {
+display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: teal;
+    padding: 5px;
+}
+header form{
+    position: absolute;
+    right: 5px;
+}
+.contenedor{
+    background: antiquewhite;
+    border: #4caf50;
+    border-style: ridge;
+}
+.w3-table{
+    background: antiquewhite;
+    border: #4caf50;
+    border-style: ridge;
+}
+
+#Ingreso{
+    /* width: 50%; */
+    /* top: -5px; */
+    float: right;
+}
+
+#buscador{
+    display: flex;
+
+}
+.w3-table{
+    background: antiquewhite;
+    border: #4caf50;
+    border-style: ridge;
+}
+
+
+#pokeList{
+    background: wheat;
+    border-radius: 20px;
+    padding-top: 10px;
+    border: 2px solid;
+}
+
+.nuevoPokemon{
+    position: fixed;
+    background-color: teal;
+    color: white;
+    right: 10px;
+    bottom: 10px;
+}
+.imagenPokemon img{
+    max-width: 100px;
+    max-height: 100px;
+}

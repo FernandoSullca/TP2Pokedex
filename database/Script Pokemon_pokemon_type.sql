@@ -17,6 +17,30 @@ SELECT * FROM pokedex.pokemon_type;
 #INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (9,5 );
 
 
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (10,6 );
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (11,6 );
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (12,6 );
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (12,4 );
+
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (13,6 );
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (13,2 );
+
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (14,6 );
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (14,2 );
+
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (15,6 );
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (15,2 );
+
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (16,7);
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (16,4);
+
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (17,7);
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (17,4);
+
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (18,7);
+#INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (18,4);
+
+
 #SELECT * FROM pokedex.pokemon__pokemon_type
 #ORDER BY pokemon_id , pokemon_type_id ;
 

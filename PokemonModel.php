@@ -40,10 +40,31 @@ class PokemonModel
                     $this->parent
                 );
             $stmt->execute();
-           var_dump($stmt);
-            /*$pokemon = $this->get($database);
-            $sql = "INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id)";
-            $database->prepare($sql)->execute($pokemon->id,$this->type);*/
+            $this->addRelationType($database);
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+
+    private function addRelationType($database){
+        try{
+            $pokemon = $this->get($database);
+            $sql = "INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (?, ?)";
+            $stmt = $database->prepare($sql);
+            $stmt->bind_param("ii",$pokemon->id,$this->type);
+            $stmt->execute();
+        } catch (Exception $e)
+        {
+            die($e->getMessage());
+        }
+    }
+    private function deleteRelationType($database){
+        try{
+            $sql = 'DELETE FROM pokemon__pokemon_type WHERE pokemon_id = ?';
+            $stmt = $database->prepare($sql);
+            $stmt->bind_param("i",$this->id);
+            $stmt->execute();
         } catch (Exception $e)
         {
             die($e->getMessage());
@@ -52,8 +73,12 @@ class PokemonModel
 
     public function get($database){
         try{
-            $sql = "SELECT * FROM pokemon WHERE order_number = ? AND name = ?";
-            return $database->prepare($sql)->execute(array($this->OrderNumber, $this->name))->fetch(PDO::FETCH_OBJ);
+            $sql = "SELECT * FROM pokemon WHERE order_number = ? AND name = ? limit 1";
+            $stmt = $database->prepare($sql);
+            $stmt->bind_param("is",$this->OrderNumber, $this->name);
+            $stmt->execute();
+            $resultSet = $stmt->get_result();
+            return $resultSet->fetch_object();
         } catch (Exception $e)
         {
             die($e->getMessage());
@@ -95,10 +120,7 @@ class PokemonModel
             $stmt = $database->prepare($sql);
             $stmt->bind_param("i",$this->id);
             $stmt->execute();
-            $sql = 'DELETE FROM pokemon__pokemon_type WHERE pokemon_id = ?';
-            $stmt = $database->prepare($sql);
-            $stmt->bind_param("i",$this->id);
-            $stmt->execute();
+            $this->deleteRelationType($database);
         } catch (Exception $e)
         {
             die($e->getMessage());

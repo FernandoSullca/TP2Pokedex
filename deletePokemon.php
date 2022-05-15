@@ -32,6 +32,17 @@ if (isset($_POST['delete'])) {
     }
 }
 
+if (isset($_POST['cancelar'])) {
+
+    try{
+        header("location:logueado.php");
+        mysqli_close($conn);
+
+    } catch (Exception $e)
+    {
+        die($e->getMessage());
+    }
+}
 ?>
 
 <!doctype html>
@@ -42,14 +53,15 @@ if (isset($_POST['delete'])) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>TP Pokedex-index</title>
+    <link rel="stylesheet" href="css/style-master.css">
+    <title>TP Pokedex- Eliminar Pokemon Selecionado</title>
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal">
+
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-    <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1></div>
+    <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1>
 </header>
 
 <form action="login.php" method="post" id="Busqueda">
@@ -87,6 +99,7 @@ if (isset($_POST['delete'])) {
     <input type="text" id="pokemon_parent" name="pokemon_parent" value="<?php echo $pokemonElegido->parent_id; ?>"><br><br>
 
     <input  type="submit" name="delete"  id="delete" value="delete">
+    <input  type="submit" name="cancelar"  id="cancelar" value="Cancelar">
 </form>
 </div>
 
