@@ -35,22 +35,25 @@ if( isset($_SESSION["usuario"]) ){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/style-master.css">
     <title>TP Pokedex-index</title>
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal">
+    <div class="w3-container w3-teal contenedor">
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1></div>
-    <form action="login.php" method="post" id="Ingreso">
-        <!--<label for="name">Nombre</label>-->
-        <input type="text" id="name" name="user_name" placeholder="Nombre">
-        <!-- <label for="surname">Apellido</label>-->
-        <input type="text" id="password" name="user_password" placeholder="Password">
-        <button type="submit" name="ingresar" >ingresar</button>
-    </form>
+        <h1 >Pokedex</h1>
+        <form action="login.php" method="post" id="Ingreso">
+            <!--<label for="name">Nombre</label>-->
+            <input type="text" id="name" name="user_name" placeholder="Nombre">
+            <!-- <label for="surname">Apellido</label>-->
+            <input type="text" id="password" name="user_password" placeholder="Password">
+            <button type="submit" name="ingresar" >ingresar</button>
+        </form>
+    </div>
+
 </header>
-<form action="busqueda.php" method="GET" id="">
+<form action="busqueda.php" method="GET" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
@@ -74,7 +77,7 @@ if( isset($_SESSION["usuario"]) ){
             <?php
             foreach ( $pokemones as $pokemons){
             ?>
-               <tr>
+               <tr id="pokeList">
                    <td><?php echo "<img src =". $pokemons['image_path']." >" ;?></td>
                    <td><?php
                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
