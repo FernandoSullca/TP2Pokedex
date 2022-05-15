@@ -25,6 +25,7 @@ if (isset($_POST['add'])) {
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
         $type   = isset( $_POST["pokemon_type"])?$_POST["pokemon_type"] : null;
         /**Magia para subir la imagen**/
+
         $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
 
         if($fileOrig!=null) {
@@ -59,6 +60,7 @@ if (isset($_POST['modify'])) {
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->modify($conn);
         mysqli_close($conn);
+
     } catch (Exception $e)
     {
         die($e->getMessage());
@@ -105,6 +107,7 @@ if (isset($_POST['cancelar'])) {
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/style-master.css">
     <title>TP Pokedex-Agregar Pokemon</title>
 
 </head>
@@ -124,6 +127,7 @@ if (isset($_POST['cancelar'])) {
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
+
 <form enctype="multipart/form-data" method="post">
 
     <label for="pokemon_number">Numero</label>

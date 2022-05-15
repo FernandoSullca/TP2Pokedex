@@ -34,16 +34,16 @@ if( !isset($_SESSION["usuario"]) ){
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal contenedor">
+
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1>
-        <h1 > <?php echo "Usuario Admin :". $_SESSION["usuario"]?> </h1>
-        <form action="logout.php" method="post" id="salir">
+        <h1 >Pokedex</h1></div>
+        <h1 > <?php echo $_SESSION["usuario"]?> </h1>
+   <form action="logout.php" method="post" id="salir">
         <!-- <input type="text" id="name" name="user_name" placeholder="Nombre">
         <input type="text" id="surname" name="user_surname" placeholder="Apellido">-->
         <button type="submit" name="salir" >Salir</button>
-        </form>
-    </div>
+    </form>
+
 </header>
 <form action="busqueda.php" method="post" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
@@ -71,7 +71,7 @@ if( !isset($_SESSION["usuario"]) ){
             foreach ( $pokemones as $pokemons){
             ?>
                 <tr>
-                    <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                    <td class="imagenPokemon"><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
                     <td><?php
                         foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                             echo "<img src =". $imagePathType.">" ; ?></td>
@@ -93,7 +93,7 @@ if( !isset($_SESSION["usuario"]) ){
             ?>
         </table>
         <form enctype="multipart/form-data" action="addPokemon.php" method="post">
-            <input type=submit value="Nuevo Pokemon">
+            <input class="nuevoPokemon" type=submit value="Nuevo Pokemon">
         </form>
     </div>
 

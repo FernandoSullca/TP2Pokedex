@@ -61,7 +61,8 @@ session_start();
     <input type='text' id='password' name='user_password' placeholder='Password'>
     <button type='submit' name='ingresar' >ingresar</button>
 </form>";
-}?></div>
+
+}?>
 
 </header>
 
@@ -102,7 +103,7 @@ group by ppt.pokemon_id)as type on type.pokemon_id = p.id"));
             foreach ( $pokemones as $pokemons){
             ?>
                <tr>
-                    <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                    <td class="imagenPokemon"><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
                    <td><?php
                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                            echo "<img src =". $imagePathType.">" ; ?></td>

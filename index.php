@@ -20,7 +20,7 @@ group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
 session_start();
 
 if( isset($_SESSION["usuario"]) ){
-    header("location:logueado.php");
+    /*header("location:logueado.php");*/
     exit();
 }
 ?>
@@ -40,9 +40,9 @@ if( isset($_SESSION["usuario"]) ){
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal contenedor">
+
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 href="./index.php" >Pokedex</h1>
+        <h1 >Pokedex</h1>
         <form action="login.php" method="post" id="Ingreso">
             <!--<label for="name">Nombre</label>-->
             <input type="text" id="name" name="user_name" placeholder="Nombre">
@@ -50,7 +50,7 @@ if( isset($_SESSION["usuario"]) ){
             <input type="text" id="password" name="user_password" placeholder="Password">
             <button type="submit" name="ingresar" >ingresar</button>
         </form>
-    </div>
+
 
 </header>
 <form action="busqueda.php" method="GET" id="buscador">
@@ -78,7 +78,7 @@ if( isset($_SESSION["usuario"]) ){
             foreach ( $pokemones as $pokemons){
             ?>
                <tr id="pokeList">
-                   <td><?php echo "<img src =". $pokemons['image_path']." >" ;?></td>
+                   <td class="imagenPokemon"><?php echo "<img src =". $pokemons['image_path']." >" ;?></td>
                    <td><?php
                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                            echo "<img src =".$imagePathType.">" ; ?></td>
