@@ -137,3 +137,47 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2022-05-12  0:36:20
+
+use pokedex;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_get_pokemon`(
+                                   IN p_search     VARCHAR(255)
+                               )
+BEGIN
+select
+    p.image_path
+     , type.image_path_type
+     , p.name
+     , type.description
+     , p.order_number
+     , p.id
+     , p.description,
+    p.weight,
+    p.height,
+    p.parent_id
+from
+    pokemon p
+        join
+    (
+        select
+            ppt.pokemon_id
+             , GROUP_CONCAT(pt.description) as description
+             , GROUP_CONCAT(pt.image_path)  as image_path_type
+        from
+            pokemon__pokemon_type ppt
+                join
+            pokemon_type pt
+            on
+                    pt.id = ppt.pokemon_type_id
+        group by
+            ppt.pokemon_id
+    )
+        as type
+    on
+            type.pokemon_id = p.id
+WHERE
+        UPPER(p.name) like CONCAT('%',UPPER(COALESCE(p_search,p.name)), '%') OR p.order_number=COALESCE(p_search,p.order_number) OR UPPER(type.description) like CONCAT('%',UPPER(COALESCE(p_search,type.description)), '%');
+END$$
+DELIMITER ;
+
