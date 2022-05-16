@@ -3,15 +3,29 @@
     border: 0;
 }
 header {
-display: flex;
+/*display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: teal;
+    padding: 5px;*/
+    display: flex;
     flex-direction: row;
     align-items: center;
     background-color: teal;
     padding: 5px;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
 }
 header form{
     position: absolute;
     right: 5px;
+}
+#user_name{
+    margin-right: 4em;
+    font-size: inherit;
+    font-style: oblique;
+    color: antiquewhite;
 }
 .contenedor{
     background: antiquewhite;
@@ -32,7 +46,12 @@ header form{
 
 #buscador{
     display: flex;
-
+    border: 2px green solid;
+    border-radius: 10px;
+    justify-content: space-between;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 5px;
 }
 .w3-table{
     background: antiquewhite;

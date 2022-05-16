@@ -1,5 +1,6 @@
 <?php
 include_once("MySqlDatabase.php");
+session_start();
 // Analizar sin secciones
 $array_ini = parse_ini_file("./configuracion/database.ini");
 //print_r($array_ini);
@@ -28,7 +29,7 @@ from pokemon__pokemon_type ppt
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id
 WHERE p.name= '$pokebusqueda' or p.order_number='$pokebusqueda'  or type.description like '$pokebusqueda'"));
-session_start();
+
 
 ?>
 <!doctype html>
@@ -44,11 +45,11 @@ session_start();
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal contenedor">
+   <!-- <div class="w3-container w3-teal contenedor">-->
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1>Pokedex</h1>
        <?php  if( isset($_SESSION["usuario"]) ){
-            echo   "<h1 > Usuario Admin: ".$_SESSION["usuario"]."</h1>
+            echo   "<h1 id=user_name class='w3-margin-left'> Usuario Admin: ".$_SESSION["usuario"]."</h1>
                     <form action='logout.php' method='post' id='salir'>
                     <button type='submit' name='salir' >Salir</button>
                     </form>";}?>
@@ -66,7 +67,7 @@ session_start();
 
 </header>
 
-<form action="#" method="get" id="Busqueda">
+<form action="#" method="get" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
