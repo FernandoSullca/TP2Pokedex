@@ -118,7 +118,7 @@ session_start();
 
 <form action="login.php" method="post" id="buscador">
     <!--<label for="name">Nombre</label>-->
-    <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <input type="text" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quien es este pokémon?</button>
 </form>
 

@@ -1,17 +1,8 @@
 <?php
 include_once("MySqlDatabase.php");
 
-$array_ini = parse_ini_file("./configuracion/database.ini");
-
-$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
-
-$pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id, p.weight,p.height, p.parent_id
-from pokemon p
-join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
-from pokemon__pokemon_type ppt 
-join pokemon_type pt on pt.id = ppt.pokemon_type_id
-group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
-
+$database= new MySqlDatabase();
+$pokemones = $database->callProcedure("sp_get_pokemon", array("p_search"=>""));
 session_start();
 
 if( !isset($_SESSION["usuario"]) ){
@@ -38,16 +29,16 @@ if( !isset($_SESSION["usuario"]) ){
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
         <h1 id="user_name" > <?php echo "Usuario Admin: ".$_SESSION["usuario"]?> </h1>
-   <form action="logout.php" method="post" id="salir">
+        <form action="logout.php" method="post" id="salir">
         <!-- <input type="text" id="name" name="user_name" placeholder="Nombre">
         <input type="text" id="surname" name="user_surname" placeholder="Apellido">-->
         <button type="submit" name="salir" >Salir</button>
-    </form>
+        </form>
 
 </header>
-<form action="busqueda.php" method="post" id="buscador">
+<form action="busqueda.php" method="get" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
-    <input type="text" id="pokemon" name="pokemon_name" required placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <input type="text" id="pokemon" name="pokemon_search" required placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quine es este pokémon?</button>
 </form>
 
@@ -76,7 +67,7 @@ if( !isset($_SESSION["usuario"]) ){
                         foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                             echo "<img src =". $imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
-                    <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['order_number'].">".$pokemons['name']."</a>"; ?></td>
+                    <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['id'].">".$pokemons['name']."</a>"; ?></td>
                     <td><form enctype="multipart/form-data" action="modifyPokemon.php" method="post">
                             <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
                             <input type=submit name="modifyPokemon" value="Modificar">
