@@ -25,6 +25,7 @@ if (isset($_POST['add'])) {
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
         $type   = isset( $_POST["pokemon_type"])?$_POST["pokemon_type"] : null;
         /**Magia para subir la imagen**/
+
         $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
 
         if($fileOrig!=null) {
@@ -59,6 +60,7 @@ if (isset($_POST['modify'])) {
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
         $pokemon->modify($conn);
         mysqli_close($conn);
+
     } catch (Exception $e)
     {
         die($e->getMessage());
@@ -111,20 +113,29 @@ if (isset($_POST['cancelar'])) {
 </head>
 <body>
 <header>
+<<<<<<< HEAD
 
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
     <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1>
+=======
+    <!--<div class="w3-container w3-teal">-->
+        <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
+        <h1 >Pokedex</h1>
+    <!--</div>-->
+    <h1 id="user_name">Usuario <?php echo $_SESSION["usuario"]?> </h1>
+>>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
 
 </header>
 
-<form action="login.php" method="post" id="Busqueda">
+<form action="login.php" method="post" id="buscador">
     <!--<label for="name">Nombre</label>-->
-    <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <input type="text" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quien es este pokémon?</button>
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
+    <h2>Esta en la seccion de Agregar Pokemon</h2>
 <form enctype="multipart/form-data" method="post">
 
     <label for="pokemon_number">Numero</label>

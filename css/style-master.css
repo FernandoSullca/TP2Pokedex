@@ -1,17 +1,41 @@
 *{
     margin: 0;
-    border: 0;
+    /*border: 1;*/
 }
 header {
+<<<<<<< HEAD
 display: flex;
+=======
+/*display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: teal;
+    padding: 5px;*/
+    display: flex;
+>>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
     flex-direction: row;
     align-items: center;
     background-color: teal;
     padding: 5px;
+<<<<<<< HEAD
+=======
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+>>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
 }
 header form{
     position: absolute;
     right: 5px;
+<<<<<<< HEAD
+=======
+}
+#user_name{
+    margin-right: 4em;
+    font-size: inherit;
+    font-style: oblique;
+    color: antiquewhite;
+>>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
 }
 .contenedor{
     background: antiquewhite;
@@ -32,7 +56,12 @@ header form{
 
 #buscador{
     display: flex;
-
+    border: 2px green solid;
+    border-radius: 10px;
+    justify-content: space-between;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 5px;
 }
 .w3-table{
     background: antiquewhite;
