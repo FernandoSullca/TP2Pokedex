@@ -105,23 +105,26 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/style-master.css">
     <title>TP Pokedex-Modificar Pokemon Selecionado</title>
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal">
+
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1></div>
-        <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1></div>
+        <h1 >Pokedex</h1>
+        <h1 id="user_name">Usuario <?php echo $_SESSION["usuario"]?> </h1>
 </header>
 
-<form action="login.php" method="post" id="Busqueda">
+<form action="login.php" method="post" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="text" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quien es este pokémon?</button>
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
+    <h2>Esta en la seccion de Modificar Pokemon</h2>
+    <h3>Esta Seguro de modificar los sguientes datos del pokemon?</h3>
 <form enctype="multipart/form-data" method="post">
     <?php  $pokemonElegido = isset($_POST["pokemon"])?json_decode($_POST["pokemon"]):""?>
     <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">

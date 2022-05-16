@@ -13,6 +13,7 @@ if(!$pokemones)
     $invalid_pokemon=true;
 }
 
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,11 +28,11 @@ if(!$pokemones)
 </head>
 <body>
 <header>
-    <div class="w3-container w3-teal contenedor">
+   <!-- <div class="w3-container w3-teal contenedor">-->
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1>Pokedex</h1>
        <?php  if( isset($_SESSION["usuario"]) ){
-            echo   "<h1 > Usuario Admin: ".$_SESSION["usuario"]."</h1>
+            echo   "<h1 id=user_name class='w3-margin-left'> Usuario Admin: ".$_SESSION["usuario"]."</h1>
                     <form action='logout.php' method='post' id='salir'>
                     <button type='submit' name='salir' >Salir</button>
                     </form>";}?>
@@ -44,11 +45,12 @@ if(!$pokemones)
     <input type='text' id='password' name='user_password' placeholder='Password'>
     <button type='submit' name='ingresar' >ingresar</button>
 </form>";
-}?></div>
+
+}?>
 
 </header>
 
-<form action="#" method="get" id="Busqueda">
+<form action="#" method="get" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="mixed" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
@@ -78,7 +80,7 @@ if(!$pokemones)
             foreach ($pokemones as $pokemons){
             ?>
                <tr>
-                    <td><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+                    <td class="imagenPokemon"><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
                    <td><?php
                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                            echo "<img src =". $imagePathType.">" ; ?></td>
