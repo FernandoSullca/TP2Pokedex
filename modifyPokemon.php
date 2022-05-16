@@ -10,7 +10,6 @@ $conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
-
 if (isset($_POST['add'])) {
     try{
         $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
@@ -127,7 +126,9 @@ session_start();
     <h3>Esta Seguro de modificar los sguientes datos del pokemon?</h3>
 <form enctype="multipart/form-data" method="post">
     <?php  $pokemonElegido = isset($_POST["pokemon"])?json_decode($_POST["pokemon"]):""?>
-    <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">
+    <!--<?php  var_dump($_POST);?>-->
+
+    <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id;?>">
 
     <label for="pokemon_number">Numero</label>
     <input type="number" id="pokemon_number" name="pokemon_number" value="<?php echo $pokemonElegido->order_number; ?>"><br><br>
