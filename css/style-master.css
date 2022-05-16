@@ -2,6 +2,33 @@
     margin: 0;
     border: 0;
 }
+p {
+    font-size: 1em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h4 {
+    font-size: 1.4em;
+}
+
+@media screen and (min-width:47em) {
+    body {
+        font-size: 90%;
+    }
+}
+
+@media screen and (min-width:60em) {
+    body {
+        font-size: 100%;
+    }
+}
 header {
 display: flex;
     flex-direction: row;
@@ -30,9 +57,15 @@ header form{
     float: right;
 }
 
-#buscador{
+.buscador{
     display: flex;
+<<<<<<< Updated upstream
 
+=======
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+>>>>>>> Stashed changes
 }
 .w3-table{
     background: antiquewhite;
