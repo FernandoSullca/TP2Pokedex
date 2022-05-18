@@ -1,21 +1,14 @@
 <?php
 include_once("MySqlDatabase.php");
 // Analizar sin secciones
-$array_ini = parse_ini_file("./configuracion/database.ini");
-//print_r($array_ini);
-$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 
+$database= new MySqlDatabase();
 $pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
 from pokemon p
 join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
 from pokemon__pokemon_type ppt 
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
-
-
-
-
-
 
 session_start();
 
@@ -53,15 +46,16 @@ if( isset($_SESSION["usuario"]) ){
 
 
 </header>
+<form action="busqueda.php" method="GET" id="buscador">
+    <!--<label for="name">Nombre</label>-->
+    <input type="mixed" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
+</form>
 
 
 <!-- Page content -->
-<main class="w3-content" style="max-width:2000px;margin-top:46px">
-    <form action="busqueda.php" method="GET" id="buscador" class="buscador">
-        <!--<label for="name">Nombre</label>-->
-        <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
-        <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
-    </form>
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
     <!-- The Pokemon-table Section -->
     <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="poke">
         <h2 class="w3-wide">Info Pokemones</h2>
@@ -82,7 +76,7 @@ if( isset($_SESSION["usuario"]) ){
                        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
                            echo "<img src =".$imagePathType.">" ; ?></td>
                     <td><?php echo $pokemons['order_number']; ?></td>
-                    <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['order_number'].">".$pokemons['name']."</a>"; ?></td>
+                    <td><?php echo "<a href=".'./interno.php?pokemon='.$pokemons['id'].">".$pokemons['name']."</a>"; ?></td>
                </tr>
            <?php
             }
@@ -91,7 +85,7 @@ if( isset($_SESSION["usuario"]) ){
     </div>
 
     <!-- End Page Content -->
-</main>
+</div>
 
 <footer>
 

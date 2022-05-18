@@ -132,7 +132,7 @@ if( !isset($_SESSION["usuario"]) ){
     <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">
 
     <label for="pokemon_number">Numero</label>
-    <input type="number" id="pokemon_number" name="pokemon_number" value="<?php echo $pokemonElegido->order_number; ?>"><br><br>
+    <input type="text" id="pokemon_number" name="pokemon_number" value="<?php echo $pokemonElegido->order_number; ?>"><br><br>
 
     <label for="pokemon_name">Nombre</label>
     <input type="text" id="pokemon_name" name="pokemon_name" value="<?php echo $pokemonElegido->name; ?>"><br><br>

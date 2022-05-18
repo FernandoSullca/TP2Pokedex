@@ -1,20 +1,10 @@
 <?php
 include_once("MySqlDatabase.php");
-// Analizar sin secciones
-$array_ini = parse_ini_file("./configuracion/database.ini");
-//print_r($array_ini);
-$pokebusqueda = isset( $_GET["pokemon_name"])?$_GET["pokemon_name"] : "";
 
-/*if(is_string($pokebusqueda)){
-    $pokeString=$pokebusqueda;
-    $pokenumber="";
-}
-else{
-    $pokeString="";
-    $pokenumber=$pokebusqueda;
-}*/
 
-$database = new MySqlDatabase($array_ini["servername"], $array_ini["username"], $array_ini["password"], $array_ini["dbname"]);
+$pokebusqueda = isset( $_GET["pokemon_search"])?$_GET["pokemon_search"] : "";
+
+$database = new MySqlDatabase();
 
 $pokemones = $database->query(sprintf("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id,p.description
 from pokemon p 
@@ -22,7 +12,7 @@ join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_
 from pokemon__pokemon_type ppt 
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id
-WHERE p.name= '$pokebusqueda' or p.order_number='$pokebusqueda'  or type.description like '$pokebusqueda'"));
+WHERE UPPER(p.name) like CONCAT('%%$pokebusqueda%%') or p.order_number='$pokebusqueda'  or UPPER(type.description) like CONCAT('%%$pokebusqueda%%')"));
 session_start();
 
 ?>
@@ -57,9 +47,9 @@ session_start();
 }?>
 
 </header>
-<form action="#" method="get" id="Busqueda">
+<form action="#" method="get" id="buscador">
     <!--<label for="name">Nombre</label>-->
-    <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <input type="mixed" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
 </form>        
 <?php

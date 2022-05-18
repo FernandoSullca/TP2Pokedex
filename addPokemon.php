@@ -133,7 +133,7 @@ if (isset($_POST['cancelar'])) {
 <form enctype="multipart/form-data" method="post">
 
     <label for="pokemon_number">Numero</label>
-    <input type="number" id="pokemon_number" name="pokemon_number"><br><br>
+    <input type="text" id="pokemon_number" name="pokemon_number"><br><br>
 
     <?php
     if (count($types)>0)
