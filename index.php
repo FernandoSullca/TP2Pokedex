@@ -53,16 +53,25 @@ if( isset($_SESSION["usuario"]) ){
 
 
 </header>
+<<<<<<< Updated upstream
 <form action="busqueda.php" method="GET" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
 </form>
+=======
+>>>>>>> Stashed changes
+
+
 
 
 <!-- Page content -->
-<div class="w3-content" style="max-width:2000px;margin-top:46px">
-
+<main class="w3-content" style="max-width:2000px;margin-top:46px">
+    <form action="busqueda.php" method="GET" id="buscador" class="buscador">
+        <!--<label for="name">Nombre</label>-->
+        <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+        <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
+    </form>
     <!-- The Pokemon-table Section -->
     <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="poke">
         <h2 class="w3-wide">Info Pokemones</h2>
@@ -92,7 +101,7 @@ if( isset($_SESSION["usuario"]) ){
     </div>
 
     <!-- End Page Content -->
-</div>
+</main>
 
 <footer>
 
