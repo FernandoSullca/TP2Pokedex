@@ -19,7 +19,6 @@ if (!$conn) {
 
 if (isset($_POST['add'])) {
     try{
-
         $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
         $name = isset( $_POST["pokemon_name"])?$_POST["pokemon_name"] : "";
         $imagePath = isset( $_POST["pokemon_image"])?$_POST["pokemon_image"] : "";
@@ -27,7 +26,9 @@ if (isset($_POST['add'])) {
         $weight = isset( $_POST["pokemon_weight"])?$_POST["pokemon_weight"] : null;
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
-        $type   = isset( $_POST["pokemon_type"])?$_POST["pokemon_type"] : null;
+        $typeList=array();
+        $typeList[]   = isset( $_POST["pokemon_type_1"])?$_POST["pokemon_type_1"] : null;
+        $typeList[]   = isset( $_POST["pokemon_type_2"])?$_POST["pokemon_type_2"] : null;
         /**Magia para subir la imagen**/
         $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
 
@@ -41,7 +42,7 @@ if (isset($_POST['add'])) {
         {
             $imagePath="./image/default.png";
         }
-        $pokemon = new PokemonModel(null, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, $type);
+        $pokemon = new PokemonModel(null, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, $typeList);
         $pokemon->add($conn);
         mysqli_close($conn);
         header("location:logueado.php");
@@ -138,7 +139,14 @@ if (isset($_POST['cancelar'])) {
     <?php
     if (count($types)>0)
     {
-    echo 'Tipo : <select name="pokemon_type">
+    echo 'Tipo 1: <select name="pokemon_type_1">
+        <option value=" " selected="selected">Seleccionar</option>';
+        foreach($types as $type)
+        {
+        echo '<option value="'.$type['id'].'">'.$type['description'].'</option>';
+        }
+        echo '</select><br><br>';
+    echo 'Tipo 2: <select name="pokemon_type_2">
         <option value=" " selected="selected">Seleccionar</option>';
         foreach($types as $type)
         {
