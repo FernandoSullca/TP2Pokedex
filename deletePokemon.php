@@ -64,11 +64,11 @@ if (isset($_POST['cancelar'])) {
 <header>
 
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1></div>
-    <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1>
+        <h1 >Pokedex</h1>
+    <h1 id="user_name">Usuario: <?php echo $_SESSION["usuario"]?> </h1>
 </header>
 
-<form action="login.php" method="post" id="Busqueda">
+<form action="login.php" method="post" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quien es este pokémon?</button>
@@ -77,7 +77,7 @@ if (isset($_POST['cancelar'])) {
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
     <h2>Esta en la seccion de Eliminacion</h2>
     <h3>Esta Seguro de eliminar al siguiente pokemon?</h3>
-<form  enctype="multipart/form-data"  method="post">
+<form  enctype="multipart/form-data"  method="post" class="deleteform">
 <!--    <?php  $pokemonElegido = json_decode($_POST['pokemon'])?>-->
     <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">
 

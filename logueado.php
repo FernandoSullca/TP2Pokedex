@@ -35,12 +35,14 @@ if( !isset($_SESSION["usuario"]) ){
 
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
         <h1 >Pokedex</h1></div>
-        <h1 > <?php echo $_SESSION["usuario"]?> </h1>
-   <form action="logout.php" method="post" id="salir">
-        <!-- <input type="text" id="name" name="user_name" placeholder="Nombre">
-        <input type="text" id="surname" name="user_surname" placeholder="Apellido">-->
-        <button type="submit" name="salir" >Salir</button>
-    </form>
+    <div class="ingresado-salir">
+        <h1 id="user_name">Usuario: <?php echo $_SESSION["usuario"]?> </h1>
+        <form action="logout.php" method="post" id="salir">
+            <!-- <input type="text" id="name" name="user_name" placeholder="Nombre">
+            <input type="text" id="surname" name="user_surname" placeholder="Apellido">-->
+            <button type="submit" name="salir" >Salir</button>
+        </form>
+    </div>
 
 </header>
 <form action="busqueda.php" method="get" id="buscador">

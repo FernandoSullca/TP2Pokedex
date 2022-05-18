@@ -65,7 +65,7 @@ header form{
 }
 
 #user_name{
-    margin-right: 4em;
+    margin-right: 2em;
     font-size: inherit;
     font-style: oblique;
     color: antiquewhite;
@@ -87,13 +87,37 @@ header form{
     /* top: -5px; */
     float: right;
 }
-
-.buscador{
+.ingresado-salir{
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
-    width: 300px;
+    align-items: center;
 }
+
+
+#buscador{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+/*    width: 300px;*/
+    border: 2px green solid;
+    border-radius: 10px;
+    justify-content: space-between;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 5px;
+}
+#buscador input{
+    width:85%;
+    border: none;
+}
+#buscador button{
+    border-radius: inherit;
+    border: none;
+    cursor: pointer;
+}
+
 
 .w3-table{
     background: antiquewhite;
@@ -119,4 +143,24 @@ header form{
 .imagenPokemon img{
     max-width: 100px;
     max-height: 100px;
+}
+/**********CSS*Add,Modify,Delete ******************/
+.modifyform{
+    background: wheat;
+    border-radius: 20px;
+    padding-top: 10px;
+    border: 2px solid;
+}
+.deleteform{
+    background: wheat;
+    border-radius: 20px;
+    padding-top: 10px;
+    border: 2px solid;
+}
+
+.addform{
+    background: wheat;
+    border-radius: 20px;
+    padding-top: 10px;
+    border: 2px solid;
 }

@@ -31,9 +31,20 @@ session_start();
 <header>
 
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1></div>
-        <h1 > <?php  if( isset($_SESSION["usuario"]) ){
-            echo $_SESSION["usuario"];}?> </h1>
+        <h1 >Pokedex</h1>
+    <div class="ingresado-salir">
+        <?php  if( isset($_SESSION["usuario"]) ){
+            echo"<h1 id='user_name'>Usuario: ".$_SESSION["usuario"]."</h1>";
+
+            if (isset($_SESSION["usuario"])) {
+                echo "<form action='logout.php' method='post' id='salir'>
+ 
+                <button type='submit' name='salir' >Salir</button>
+                </form>";
+            }
+        }?>
+    </div>
+
         <?php
         if( !isset($_SESSION["usuario"]) ){
     echo " <form action='login.php' method='post' id='Ingreso'>
@@ -45,19 +56,13 @@ session_start();
 </form>";
    
 }?>
-
 </header>
+
 <form action="#" method="get" id="buscador">
-    <!--<label for="name">Nombre</label>-->
-    <input type="mixed" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <input type="text" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
 </form>        
-<?php
-if( isset($_SESSION["usuario"]) ){
-echo "<form action='logout.php' method='post' id='salir'>
- 
-        <button type='submit' name='salir' >Salir</button>"; }
-?>        
+
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">
