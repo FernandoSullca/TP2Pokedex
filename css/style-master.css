@@ -3,39 +3,50 @@
     /*border: 1;*/
 }
 header {
-<<<<<<< HEAD
+
 display: flex;
-=======
-/*display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: teal;
-    padding: 5px;*/
-    display: flex;
->>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
+
     flex-direction: row;
     align-items: center;
     background-color: teal;
     padding: 5px;
-<<<<<<< HEAD
-=======
+
     flex-wrap: nowrap;
     align-content: center;
     justify-content: space-between;
->>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
+
 }
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: teal;
+    padding: 5px;
+    justify-content: space-between;
+}
+@media screen and (min-width:60em) {
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background-color: teal;
+        padding: 5px;
+    }
+}
+
 header form{
-    position: absolute;
-    right: 5px;
-<<<<<<< HEAD
-=======
+    /*position: absolute;
+    right: 5px;*/
+
 }
+
 #user_name{
     margin-right: 4em;
     font-size: inherit;
     font-style: oblique;
     color: antiquewhite;
->>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
+
 }
 .contenedor{
     background: antiquewhite;
@@ -63,12 +74,12 @@ header form{
     margin-right: 1em;
     margin-top: 5px;
 }
+
 .w3-table{
     background: antiquewhite;
     border: #4caf50;
     border-style: ridge;
 }
-
 
 #pokeList{
     background: wheat;
@@ -88,3 +99,8 @@ header form{
     max-width: 100px;
     max-height: 100px;
 }
+
+
+
+
+
