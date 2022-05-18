@@ -53,16 +53,6 @@ if( isset($_SESSION["usuario"]) ){
 
 
 </header>
-<<<<<<< Updated upstream
-<form action="busqueda.php" method="GET" id="buscador">
-    <!--<label for="name">Nombre</label>-->
-    <input type="mixed" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
-    <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
-</form>
-=======
->>>>>>> Stashed changes
-
-
 
 
 <!-- Page content -->
