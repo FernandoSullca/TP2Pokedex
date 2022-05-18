@@ -1,10 +1,12 @@
 <?php
-include_once("MySqlDatabase.php");
 
+include_once("MySqlDatabase.php");
+// Analizar sin secciones
+$array_ini = parse_ini_file("./configuracion/database.ini");
 //print_r($array_ini);
 $pokeid = isset( $_GET["pokemon"])?$_GET["pokemon"] : "";
 
-$database = new MySqlDatabase();
+$database = new MySqlDatabase($array_ini["servername"], $array_ini["username"], $array_ini["password"], $array_ini["dbname"]);
 
 $pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id,p.description
 from pokemon p 
@@ -12,8 +14,12 @@ join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_
 from pokemon__pokemon_type ppt 
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id 
-where p.id=".$pokeid);
+where p.order_number=".$pokeid);
 
+/*#var_dump($pokemones);
+$fila = mysqli_fetch_row($pokemones);
+var_dump($fila);
+#$pokemons = mysqli_fetch_array($pokemones);*/
 session_start();
 
 ?>
