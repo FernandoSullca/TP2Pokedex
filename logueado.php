@@ -1,9 +1,7 @@
 <?php
 include_once("MySqlDatabase.php");
 
-$array_ini = parse_ini_file("./configuracion/database.ini");
-
-$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+$database= new MySqlDatabase();
 
 $pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id, p.weight,p.height, p.parent_id
 from pokemon p
@@ -45,10 +43,9 @@ if( !isset($_SESSION["usuario"]) ){
     </form>
 
 </header>
-<form action="busqueda.php" method="post" id="Busqueda">
-    <!--<label for="name">Nombre</label>-->
-    <input type="text" id="pokemon" name="pokemon_name" required placeholder="Ingrese el Nombre, tipo o numero de pokémon">
-    <button type="submit" name="BuscarPokemon" >¿Quine es este pokémon?</button>
+<form action="busqueda.php" method="get" id="buscador">
+    <input type="text" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o número de pokémon">
+    <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
 </form>
 
 

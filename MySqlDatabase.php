@@ -7,12 +7,13 @@ class MySqlDatabase
     private $database;
     private $conn;
 
-    public function __construct($host, $user, $pass, $database)
+    public function __construct()
     {
-        $this->host = $host;
-        $this->user = $user;
-        $this->pass = $pass;
-        $this->database = $database;
+        $array_ini = $this->readConfiguration();
+        $this->host = $array_ini["servername"];
+        $this->user = $array_ini["username"];
+        $this->pass = $array_ini["password"];
+        $this->database = $array_ini["dbname"];
 
         $this->connect();
     }
@@ -44,6 +45,11 @@ class MySqlDatabase
     {
         mysqli_close($this->conn);
     }
+
+    private function readConfiguration(){
+        return parse_ini_file("./configuracion/database.ini");
+    }
+
 }
 
 

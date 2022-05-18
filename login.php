@@ -1,9 +1,7 @@
 <?php
 include_once("MySqlDatabase.php");
-// Analizar sin secciones
-$array_ini = parse_ini_file("./configuracion/database.ini");
-//print_r($array_ini);
-$database= new MySqlDatabase( $array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+
+$database= new MySqlDatabase();
 
 session_start();
 $usuario = isset( $_POST["user_name"])?$_POST["user_name"] : "";

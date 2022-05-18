@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `pokemon`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pokemon` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `order_number` int NOT NULL,
+  `order_number` varchar(255) NOT NULL,
   `image_path` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
