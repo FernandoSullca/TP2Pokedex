@@ -7,6 +7,7 @@ $array_ini = parse_ini_file("./configuracion/database.ini");
 
 // Create connection
 $conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+// Create connextion logueado->Modificar
 $database = new MySqlDatabase();
 $queryType = "select * from pokemon_type type";
 $types =  $database->query($queryType);
@@ -26,23 +27,6 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-if (isset($_POST['add'])) {
-    try{
-        $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
-        $name = isset( $_POST["pokemon_name"])?$_POST["pokemon_name"] : "";
-        $imagePath = isset( $_POST["pokemon_image"])?$_POST["pokemon_image"] : "";
-        $description = isset( $_POST["pokemon_description"])?$_POST["pokemon_description"] : "";
-        $weight = isset( $_POST["pokemon_weight"])?$_POST["pokemon_weight"] : null;
-        $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
-        $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
-        $pokemon = new PokemonModel(null, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
-        $pokemon->add($conn);
-        mysqli_close($conn);
-        } catch (Exception $e)
-        {
-            die($e->getMessage());
-        }
-}
 if (isset($_POST['modify'])) {
     try{
         $id = isset( $_POST["pokemon_id"])?$_POST["pokemon_id"] : null;
@@ -125,9 +109,6 @@ if( !isset($_SESSION["usuario"]) ){
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
 <form enctype="multipart/form-data" method="post" class="modifyform">
-    <?php  $pokemonElegido = isset($_POST["pokemon"])?json_decode($_POST["pokemon"]):""?>
-    <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">
-<form enctype="multipart/form-data" method="post">
     <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido['id']; ?>">
 
     <label for="pokemon_number">Numero</label>
