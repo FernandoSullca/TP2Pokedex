@@ -30,6 +30,12 @@ class MySqlDatabase
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
+    public function uniqueResult($sql)
+    {
+        $result = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($result);
+    }
+
     private function connect()
     {
         $conn = mysqli_connect($this->host, $this->user, $this->pass, $this->database);

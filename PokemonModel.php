@@ -48,12 +48,14 @@ class PokemonModel
     }
 
     private function addRelationType($database){
-        try{
-            $pokemon = $this->get($database);
-            $sql = "INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (?, ?)";
-            $stmt = $database->prepare($sql);
-            $stmt->bind_param("ii",$pokemon->id,$this->type);
-            $stmt->execute();
+        try {
+            foreach($this->type as $typeID){
+                $pokemon = $this->get($database);
+                $sql = "INSERT INTO pokemon__pokemon_type (pokemon_id, pokemon_type_id) VALUES (?, ?)";
+                $stmt = $database->prepare($sql);
+                $stmt->bind_param("ii", $pokemon->id,$typeID);
+                $stmt->execute();
+            }
         } catch (Exception $e)
         {
             die($e->getMessage());
@@ -108,6 +110,8 @@ class PokemonModel
                 $this->id
             );
             $stmt->execute();
+            $this->deleteRelationType($database);
+            $this->addRelationType($database);
         } catch (Exception $e)
         {
             die($e->getMessage());

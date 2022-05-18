@@ -77,7 +77,7 @@ if( !isset($_SESSION["usuario"]) ){
                     <td><?php echo $pokemons['order_number']; ?></td>
                     <td><?php echo $pokemons['name']; ?></td>
                     <td><form enctype="multipart/form-data" action="modifyPokemon.php" method="post">
-                            <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
+                            <input type="hidden" name="pokemon_id" value=<?php  echo $pokemons['id']; ?>>
                             <input type=submit name="modifyPokemon" value="Modificar">
                         </form>
                     </td>
