@@ -1,6 +1,10 @@
 <?php
 include_once 'PokemonModel.php';
 session_start();
+if( !isset($_SESSION["usuario"]) ){
+    header("location:index.php");
+    exit();
+}
 // Create connection
 $array_ini = parse_ini_file("./configuracion/database.ini");
 
