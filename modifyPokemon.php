@@ -10,6 +10,7 @@ $conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
 if (isset($_POST['add'])) {
     try{
         $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
@@ -111,29 +112,20 @@ session_start();
 <header>
 
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-<<<<<<< HEAD
         <h1 >Pokedex</h1></div>
         <h1 >Usuario <?php echo $_SESSION["usuario"]?> </h1>
-=======
-        <h1 >Pokedex</h1>
-        <h1 id="user_name">Usuario <?php echo $_SESSION["usuario"]?> </h1>
->>>>>>> 7a555b7a3468c44b87fbfe82fd7a5f51a4ecbf86
 </header>
 
-<form action="login.php" method="post" id="buscador">
+<form action="login.php" method="post" id="Busqueda">
     <!--<label for="name">Nombre</label>-->
-    <input type="text" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
+    <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quien es este pokémon?</button>
 </form>
 
 <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="form-add">
-    <h2>Esta en la seccion de Modificar Pokemon</h2>
-    <h3>Esta Seguro de modificar los sguientes datos del pokemon?</h3>
 <form enctype="multipart/form-data" method="post">
     <?php  $pokemonElegido = isset($_POST["pokemon"])?json_decode($_POST["pokemon"]):""?>
-    <!--<?php  var_dump($_POST);?>-->
-
-    <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id;?>">
+    <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">
 
     <label for="pokemon_number">Numero</label>
     <input type="number" id="pokemon_number" name="pokemon_number" value="<?php echo $pokemonElegido->order_number; ?>"><br><br>
