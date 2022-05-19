@@ -58,7 +58,7 @@ if (isset($_POST['modify'])) {
         }
         else
         {
-            $imagePath="./image/default.png";
+            $imagePath=$_POST["pokemon_image"] ;
         }
 
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, $typeList);
@@ -153,8 +153,8 @@ if( !isset($_SESSION["usuario"]) ){
 
     <label for="imagePath">Imagen</label>
     <img src ="<?php echo $pokemonElegido['image_path']; ?>" width="50px"><br>
-    <!--<label for="imagePath">"<?php /*echo $pokemonElegido['image_path']; */?>"</label><br>-->
-    <input type="FILE" id="pokemon_image" accept="image/*" name="pokemon_image"><br><br>
+    <input type="hidden" name="pokemon_image" value="<?php echo $pokemonElegido['image_path']; ?>"><br>
+    <input type="FILE" id="pokemon_image" accept="image/*" name="pokemon_image" ><br><br>
     <label for="pokemon_description">Descripcion</label>
     <input type="text" id="pokemon_description" name="pokemon_description" value="<?php echo $pokemonElegido['description']; ?>"><br><br>
 
