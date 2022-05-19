@@ -2,33 +2,40 @@
 include_once 'PokemonModel.php';
 include_once("MySqlDatabase.php");
 
-$array_ini = parse_ini_file("./configuracion/database.ini");
-//print_r($array_ini);
+if (isset($_POST['pokemon_id'])) {
 
-// Create connection
-$conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
-// Create connextion logueado->Modificar
-$database = new MySqlDatabase();
-$queryType = "select * from pokemon_type type";
-$types =  $database->query($queryType);
-
-$pokemonID = isset($_POST["pokemon_id"]) ? ($_POST["pokemon_id"]) : "";
-$pokemonElegido = $database->uniqueResult(sprintf(
-        "select p.image_path, p.name , type.type_id, p.order_number, p.id,p.description,
+    try{
+        // Create connextion Logueado->Modificar
+        $database = new MySqlDatabase();
+        $queryType = "select * from pokemon_type type";
+        $types =  $database->query($queryType);
+        $pokemonID = isset($_POST["pokemon_id"]) ? ($_POST["pokemon_id"]) : "";
+        var_dump($_POST);
+        $pokemonElegido = $database->uniqueResult(sprintf(
+            "select p.image_path, p.name , type.type_id, p.order_number, p.id,p.description,
                 p.weight,p.height,p.parent_id
-from pokemon p 
-join (select ppt.pokemon_id, GROUP_CONCAT(pt.id) as type_id
-from pokemon__pokemon_type ppt 
-join pokemon_type pt on pt.id = ppt.pokemon_type_id
-group by ppt.pokemon_id)as type on type.pokemon_id = p.id
-WHERE p.id = $pokemonID"));
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+        from pokemon p 
+        join (select ppt.pokemon_id, GROUP_CONCAT(pt.id) as type_id
+        from pokemon__pokemon_type ppt 
+        join pokemon_type pt on pt.id = ppt.pokemon_type_id
+        group by ppt.pokemon_id)as type on type.pokemon_id = p.id
+        WHERE p.id = $pokemonID"));
+
+    } catch (Exception $e)
+    {
+        die($e->getMessage());
+    }
 }
 
 if (isset($_POST['modify'])) {
     try{
+// Create connection
+        $array_ini = parse_ini_file("./configuracion/database.ini");
+        $conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+// Check connection- primaria, para guardar al pokemon modificado
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
         $id = isset( $_POST["pokemon_id"])?$_POST["pokemon_id"] : null;
         $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
         $name = isset( $_POST["pokemon_name"])?$_POST["pokemon_name"] : "";
@@ -43,7 +50,7 @@ if (isset($_POST['modify'])) {
         $typeList[]   = isset( $_POST["pokemon_type_2"])?$_POST["pokemon_type_2"] : null;
         /**Magia para subir la imagen**/
 
-   /*     $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
+        $fileOrig=isset( $_FILES["pokemon_image"]["tmp_name"])?$_FILES["pokemon_image"]["tmp_name"]:null;
 
         if($fileOrig!=null) {
             $filePath = "./image/" . $_FILES["pokemon_image"]["name"];
@@ -53,7 +60,8 @@ if (isset($_POST['modify'])) {
         else
         {
             $imagePath="./image/default.png";
-        }*/
+        }
+
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, $typeList);
         $pokemon->modify($conn);
         mysqli_close($conn);
@@ -66,9 +74,8 @@ if (isset($_POST['modify'])) {
 if (isset($_POST['cancelar'])) {
 
     try{
+        //mysqli_close($conn);
         header("location:logueado.php");
-        mysqli_close($conn);
-
     } catch (Exception $e)
     {
         die($e->getMessage());
@@ -146,8 +153,9 @@ if( !isset($_SESSION["usuario"]) ){
     <input type="text" id="pokemon_name" name="pokemon_name" value="<?php echo $pokemonElegido['name']; ?>"><br><br>
 
     <label for="imagePath">Imagen</label>
-    <input type="text" id="pokemon_image" accept="image/*" name="pokemon_image" value="<?php echo $pokemonElegido['image_path']; ?>"><br><br>
-
+    <img src ="<?php echo $pokemonElegido['image_path']; ?>" width="50px"><br>
+    <!--<label for="imagePath">"<?php /*echo $pokemonElegido['image_path']; */?>"</label><br>-->
+    <input type="FILE" id="pokemon_image" accept="image/*" name="pokemon_image"><br><br>
     <label for="pokemon_description">Descripcion</label>
     <input type="text" id="pokemon_description" name="pokemon_description" value="<?php echo $pokemonElegido['description']; ?>"><br><br>
 

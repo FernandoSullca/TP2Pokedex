@@ -2,7 +2,6 @@
 include_once("MySqlDatabase.php");
 
 $database= new MySqlDatabase();
-
 $pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id, p.weight,p.height, p.parent_id
 from pokemon p
 join (select ppt.pokemon_id, GROUP_CONCAT(pt.description) as description, GROUP_CONCAT(pt.image_path) as image_path_type
@@ -16,7 +15,6 @@ if( !isset($_SESSION["usuario"]) ){
     header("location:index.php");
     exit();
 }
-
 
 ?>
 <!doctype html>
@@ -34,7 +32,7 @@ if( !isset($_SESSION["usuario"]) ){
 <header>
 
         <img src="./image/pokemon_logo.png" id="logoPokemonHeader" class="w3-margin-right" alt="logo pokemon" style="float:left;width:42px;height:42px;">
-        <h1 >Pokedex</h1></div>
+        <h1 >Pokedex</h1>
     <div class="ingresado-salir">
         <h1 id="user_name">Usuario: <?php echo $_SESSION["usuario"]?> </h1>
         <form action="logout.php" method="post" id="salir">
@@ -77,12 +75,12 @@ if( !isset($_SESSION["usuario"]) ){
                     <td><?php echo $pokemons['order_number']; ?></td>
                     <td><?php echo $pokemons['name']; ?></td>
                     <td><form enctype="multipart/form-data" action="modifyPokemon.php" method="post">
-                            <input type="hidden" name="pokemon_id" value=<?php  echo $pokemons['id']; ?>>
+                            <input type="hidden" name="pokemon_id" value=<?php echo $pokemons['id']; ?>>
                             <input type=submit name="modifyPokemon" value="Modificar">
                         </form>
                     </td>
                     <td><form enctype="multipart/form-data" action="deletePokemon.php" method="post">
-                            <input type="hidden" name="pokemon" value=<?php  echo json_encode($pokemons); ?>>
+                            <input type="hidden" name="pokemon_id" value=<?php echo $pokemons['id']; ?>>
                             <input type=submit name="deletePokemon" value="eliminar">
                         </form>
                     </td>

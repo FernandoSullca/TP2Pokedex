@@ -1,7 +1,11 @@
 <?php
 include_once("MySqlDatabase.php");
-// Analizar sin secciones
+session_start();
 
+if( isset($_SESSION["usuario"]) ){
+    header("location:logueado.php");
+    exit();
+}
 $database= new MySqlDatabase();
 $pokemones = $database->query("select p.image_path, type.image_path_type, p.name , type.description, p.order_number, p.id
 from pokemon p
@@ -10,15 +14,8 @@ from pokemon__pokemon_type ppt
 join pokemon_type pt on pt.id = ppt.pokemon_type_id
 group by ppt.pokemon_id)as type on type.pokemon_id = p.id");
 
-session_start();
 
-if( isset($_SESSION["usuario"]) ){
-    header("location:logueado.php");
-    exit();
-}
 ?>
-
-
 
 <!doctype html>
 <html lang="en">
@@ -44,14 +41,12 @@ if( isset($_SESSION["usuario"]) ){
             <button type="submit" name="ingresar" >ingresar</button>
         </form>
 
-
 </header>
 <form action="busqueda.php" method="GET" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="mixed" id="pokemon" name="pokemon_search" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quién es este pokémon?</button>
 </form>
-
 
 <!-- Page content -->
 <div class="w3-content" style="max-width:2000px;margin-top:46px">

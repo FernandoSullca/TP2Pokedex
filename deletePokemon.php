@@ -1,22 +1,40 @@
 <?php
 include_once 'PokemonModel.php';
-session_start();
-if( !isset($_SESSION["usuario"]) ){
-    header("location:index.php");
-    exit();
-}
-// Create connection
-$array_ini = parse_ini_file("./configuracion/database.ini");
+include_once("MySqlDatabase.php");
 
-$conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+if (isset($_POST['pokemon_id'])) {
+
+    try{
+        // Create connextion Logueado->Eliminar
+        $database = new MySqlDatabase();
+        $queryType = "select * from pokemon_type type";
+        $types =  $database->query($queryType);
+        $pokemonID = isset($_POST["pokemon_id"]) ? ($_POST["pokemon_id"]) : "";
+        $pokemonElegido = $database->uniqueResult(sprintf(
+            "select p.image_path, p.name , type.type_id, p.order_number, p.id,p.description,
+                p.weight,p.height,p.parent_id
+        from pokemon p 
+        join (select ppt.pokemon_id, GROUP_CONCAT(pt.id) as type_id
+        from pokemon__pokemon_type ppt 
+        join pokemon_type pt on pt.id = ppt.pokemon_type_id
+        group by ppt.pokemon_id)as type on type.pokemon_id = p.id
+        WHERE p.id = $pokemonID"));
+    } catch (Exception $e)
+    {
+        die($e->getMessage());
+    }
 }
 
 if (isset($_POST['delete'])) {
     try{
+// Create connection
+        $array_ini = parse_ini_file("./configuracion/database.ini");
+        $conn = mysqli_connect($array_ini["servername"] , $array_ini["username"], $array_ini["password"],$array_ini["dbname"]);
+// Check connection
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
 
         $id = isset( $_POST["pokemon_id"])?$_POST["pokemon_id"] : null;
         $orderNumber = isset( $_POST["pokemon_number"])?$_POST["pokemon_number"] : null;
@@ -27,6 +45,9 @@ if (isset($_POST['delete'])) {
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
+        var_dump( $id);
+        var_dump(  $orderNumber);
+        var_dump( $name );
         $pokemon->delete($conn);
         mysqli_close($conn);
         header("location:logueado.php");
@@ -40,13 +61,20 @@ if (isset($_POST['cancelar'])) {
 
     try{
         header("location:logueado.php");
-        mysqli_close($conn);
+        /*mysqli_close($conn);*/
 
     } catch (Exception $e)
     {
         die($e->getMessage());
     }
 }
+
+session_start();
+if( !isset($_SESSION["usuario"]) ){
+    header("location:index.php");
+    exit();
+}
+
 ?>
 
 <!doctype html>
@@ -78,29 +106,30 @@ if (isset($_POST['cancelar'])) {
     <h2>Esta en la seccion de Eliminacion</h2>
     <h3>Esta Seguro de eliminar al siguiente pokemon?</h3>
 <form  enctype="multipart/form-data"  method="post" class="deleteform">
-<!--    <?php  $pokemonElegido = json_decode($_POST['pokemon'])?>-->
-    <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido->id; ?>">
+
+    <input type="hidden" name="pokemon_id" value="<?php echo $pokemonElegido['id']; ?>">
 
     <label for="pokemon_number">Numero</label>
-    <input type="text" id="pokemon_number" name="pokemon_number" value="<?php echo $pokemonElegido->order_number; ?>"><br><br>
+    <input type="text" id="pokemon_number" name="pokemon_number" value="<?php echo $pokemonElegido['order_number']; ?>"><br><br>
 
     <label for="pokemon_name">Nombre</label>
-    <input type="text" id="pokemon_name" name="pokemon_name" value="<?php echo $pokemonElegido->name; ?>"><br><br>
+    <input type="text" id="pokemon_name" name="pokemon_name" value="<?php echo $pokemonElegido['name']; ?>"><br><br>
 
     <label for="imagePath">Imagen</label>
-    <input type="text" id="pokemon_image" accept="image/*" name="pokemon_image" value="<?php echo $pokemonElegido->image_path; ?>"><br><br>
+    <img src ="<?php echo $pokemonElegido['image_path']; ?>" width="50px"><br>
+    <input type="text" id="pokemon_image" accept="image/*" name="pokemon_image" value="<?php echo $pokemonElegido['image_path']; ?>"><br><br>
 
     <label for="pokemon_description">Descripcion</label>
-    <input type="text" id="pokemon_description" name="pokemon_description" value="<?php echo $pokemonElegido->description; ?>"><br><br>
+    <input type="text" id="pokemon_description" name="pokemon_description" value="<?php echo $pokemonElegido['description']; ?>"><br><br>
 
     <label for="pokemon_weight">Peso</label>
-    <input type="number" id="pokemon_weight" name="pokemon_weight" value="<?php echo $pokemonElegido->weight; ?>"><br><br>
+    <input type="number" id="pokemon_weight" name="pokemon_weight" value="<?php echo $pokemonElegido['weight']; ?>"><br><br>
 
     <label for="pokemon_height">Altura</label>
-    <input type="number" id="pokemon_height" name="pokemon_height" value="<?php echo $pokemonElegido->height; ?>"><br><br>
+    <input type="number" id="pokemon_height" name="pokemon_height" value="<?php echo $pokemonElegido['height']; ?>"><br><br>
 
     <label for="pokemon_parent">Origen</label>
-    <input type="text" id="pokemon_parent" name="pokemon_parent" value="<?php echo $pokemonElegido->parent_id; ?>"><br><br>
+    <input type="text" id="pokemon_parent" name="pokemon_parent" value="<?php echo $pokemonElegido['parent_id']; ?>"><br><br>
 
     <input  type="submit" name="delete"  id="delete" value="delete">
     <input  type="submit" name="cancelar"  id="cancelar" value="Cancelar">
