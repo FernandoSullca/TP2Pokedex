@@ -45,9 +45,6 @@ if (isset($_POST['delete'])) {
         $height = isset( $_POST["pokemon_height"])?$_POST["pokemon_height"] : null;
         $parent = isset( $_POST["pokemon_parent"])?$_POST["pokemon_parent"] : null;
         $pokemon = new PokemonModel($id, $orderNumber,$name,$imagePath, $description, $weight, $height, $parent, 1);
-        var_dump( $id);
-        var_dump(  $orderNumber);
-        var_dump( $name );
         $pokemon->delete($conn);
         mysqli_close($conn);
         header("location:logueado.php");
@@ -96,7 +93,7 @@ if( !isset($_SESSION["usuario"]) ){
     <h1 id="user_name">Usuario: <?php echo $_SESSION["usuario"]?> </h1>
 </header>
 
-<form action="login.php" method="post" id="buscador">
+<form action="busqueda.php" method="post" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quien es este pokémon?</button>
@@ -115,6 +112,34 @@ if( !isset($_SESSION["usuario"]) ){
     <label for="pokemon_name">Nombre</label>
     <input type="text" id="pokemon_name" name="pokemon_name" value="<?php echo $pokemonElegido['name']; ?>"><br><br>
 
+    <?php
+    $pokeTypes= array();
+    if (count($types)>0)
+    {   $index=0;
+        foreach (explode(',', $pokemonElegido['type_id'])as $typeID) {
+            $index=$index+1;
+            $name= "pokemon_type_".$index;
+            $pokeTypes[$name]=$typeID;
+        }
+        echo 'Tipo 1: <select name="pokemon_type_1">
+        <option value=" " selected="selected">Seleccionar</option>';
+        foreach($types as $selection)
+        {
+            $selected1= ($pokeTypes['pokemon_type_1'] == $selection['id']) ? "selected" : "";
+            echo '<option ' . $selected1 . ' value="' . $selection['id']. '">' . $selection['description'] . '</option>';
+        }
+        echo '</select><br><br>';
+        echo 'Tipo 2: <select name="pokemon_type_2">
+        <option value=" " selected="selected">Seleccionar</option>';
+        foreach($types as $selection)
+        {
+            $selected2 = ($pokeTypes['pokemon_type_2'] == $selection['id']) ? "selected" : "";
+            echo '<option ' . $selected2 . ' value="' . $selection['id']. '">' . $selection['description'] . '</option>';
+        }
+        echo '</select><br><br>';
+
+    }
+    ?>
     <label for="imagePath">Imagen</label>
     <img src ="<?php echo $pokemonElegido['image_path']; ?>" width="50px"><br>
     <input type="text" id="pokemon_image" accept="image/*" name="pokemon_image" value="<?php echo $pokemonElegido['image_path']; ?>"><br><br>

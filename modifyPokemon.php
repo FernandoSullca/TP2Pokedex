@@ -10,7 +10,6 @@ if (isset($_POST['pokemon_id'])) {
         $queryType = "select * from pokemon_type type";
         $types =  $database->query($queryType);
         $pokemonID = isset($_POST["pokemon_id"]) ? ($_POST["pokemon_id"]) : "";
-        var_dump($_POST);
         $pokemonElegido = $database->uniqueResult(sprintf(
             "select p.image_path, p.name , type.type_id, p.order_number, p.id,p.description,
                 p.weight,p.height,p.parent_id
@@ -108,7 +107,7 @@ if( !isset($_SESSION["usuario"]) ){
         <h1 id="user_name">Usuario: <?php echo $_SESSION["usuario"]?> </h1>
 </header>
 
-<form action="login.php" method="post" id="buscador">
+<form action="busqueda.php" method="post" id="buscador">
     <!--<label for="name">Nombre</label>-->
     <input type="text" id="pokemon" name="pokemon_name" placeholder="Ingrese el Nombre, tipo o numero de pokémon">
     <button type="submit" name="BuscarPokemon" >¿Quien es este pokémon?</button>
