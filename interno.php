@@ -40,29 +40,32 @@ session_start();
 
 
 </header>
-    <div claas="contenedor-pokemon">
+    <div class="contenedor_pokemon">
+        <?php
+        foreach ( $pokemones as $pokemons){
+        ?>
+        <tr>
+            <td class="imagenPokemon"><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
+            <td><?php
+                foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
+                    echo "<img class=nombre-tipo-pokemon src =". $imagePathType.">" ; ?></td>
+            <td ><?php echo $pokemons['order_number']; ?></td>
+            <td ><p class="descripcion-pokemon"><?php echo $pokemons['description']; ?></p></td>
+            <td ><p class="nombre-pokemon"><?php echo $pokemons['name']; ?></p></td>
+
+            <?php
+            }
+            ?>
         <div class="Imagen-pokemon"  >
 
         </div>
         <div class="nombre-tipo-pokemon" ></div>
         <div class="descripcion-pokemon"></div>
+
+
     </div>
     
-<?php
-foreach ( $pokemones as $pokemons){
-?>
-<tr>
-    <td class="imagenPokemon"><?php echo "<img src =". $pokemons['image_path'].">"; ?></td>
-    <td><?php
-        foreach (explode(',', $pokemons['image_path_type'])as $imagePathType)
-            echo "<img src =". $imagePathType.">" ; ?></td>
-    <td><?php echo $pokemons['order_number']; ?></td>
-    <td><?php echo $pokemons['description']; ?></td>
-    <td><?php echo $pokemons['name']; ?></td>
 
-    <?php
-            }
-            ?>
 
 <footer>
 <form action="index.php" method="post" id="salir">
